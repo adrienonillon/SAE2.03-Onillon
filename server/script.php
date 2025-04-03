@@ -48,6 +48,20 @@ if ( isset($_REQUEST['todo']) ){
   // $_REQUEST est une superglobale qui contient les paramètres de la requête HTTP.
   $todo = $_REQUEST['todo'];
 
+
+
+  if ($todo === "addMovie") {
+    header("Content-Type: application/json");
+
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    if ($data && isset($data["name"], $data["image"], $data["description"])) {
+        $result = Controller::addMovie($data);
+        echo json_encode(["success" => $result]);
+    } else {
+        echo json_encode(["success" => false, "error" => "Données invalides"]);
+    }
+}
   // en fonction de la valeur de 'todo', on appelle la fonction de contrôle appropriée
   // peut s'écrire aussi avec des if/else
   switch($todo){

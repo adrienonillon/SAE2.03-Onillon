@@ -40,5 +40,17 @@ Log.format = function(txt){
 }
 
 
+Log.add = function (message) {
+    let logContainer = document.querySelector("#log");
+    if (!logContainer) {
+        logContainer = document.createElement("div");
+        logContainer.id = "log";
+        document.body.appendChild(logContainer);
+    }
+    
+    logContainer.innerHTML += `<p>${message}</p>`;
+};
+
+
 export {Log};
 

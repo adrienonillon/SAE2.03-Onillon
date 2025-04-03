@@ -24,3 +24,10 @@ function readMoviesController(){
     $movies = getAllMovies(); 
     return $movies; 
 }
+
+class Controller {
+    public static function addMovie($data) {
+        return Model::addMovie($data["name"], $data["image"], $data["description"]);
+    }
+}
+

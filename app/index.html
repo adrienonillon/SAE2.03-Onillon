@@ -34,13 +34,10 @@
       };
 
       C.getMovie = async function () {
-            let data = await DataMovie.requestMovies();
-            // On affiche les films
-            V.renderMovie(data);
-        };
-
-
-
+        let data = await DataMovie.requestMovies();
+        // On affiche les films
+        V.renderMovie(data);
+      };
 
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
@@ -56,8 +53,6 @@
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(hAbout);
       };
-      
-
 
       /**
        * V.renderMovie
@@ -67,8 +62,11 @@
        * formaté par le composant Movie.
        */
       V.renderMovie = function (data) {
-        let content = document.querySelector("#content");
-        content.innerHTML = Movie.formatMany(data);
+        if (data.length === 0) {
+          content.innerHTML = "<p>Aucun film disponible pour le moment.</p>";
+        } else {
+          content.innerHTML = Movie.formatMany(data);
+        }
       };
       C.start(); // Démarre l'application
     </script>

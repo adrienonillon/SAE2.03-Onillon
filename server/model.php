@@ -32,3 +32,12 @@ function getAllMovies(){
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res; // Retourne les résultats
 }
+
+
+class Model {
+    public static function addMovie($name, $image, $description) {
+        $db = Database::getConnection();
+        $stmt = $db->prepare("INSERT INTO movies (name, image, description) VALUES (?, ?, ?)");
+        return $stmt->execute([$name, $image, $description]);
+    }
+}
