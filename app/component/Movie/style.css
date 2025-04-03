@@ -1,0 +1,61 @@
+body {
+background-color: rgb(0, 0, 0);
+}
+.movies-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Colonnes ajustables */
+  gap: 15px; /* Espacement entre les affiches */
+  padding: 20px 40px; 
+}
+
+/* Chaque film */
+.movie {
+  cursor: pointer;
+  transition: transform 0.4s ease-in-out; /* Transition fluide */
+}
+
+.movie:hover {
+  transform: scale(1.05); /* Zoom léger au survol */
+}
+
+/* Image du film */
+.movie img {
+  width: 100%;
+  height: auto;
+  /* object-fit: cover; */
+  border-radius: 4px; /* Coins légèrement arrondis */
+  transition: opacity 0.3s ease-in-out;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7); /* Ombre élégante */
+}
+
+.movie:hover img {
+  opacity: 0.9;
+}
+
+/* Titre du film */
+.movie-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+
+ 
+  color: #e5e5e5;
+  text-align: left;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .movies-container {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Ajuste les colonnes sur petits écrans */
+    gap: 10px;
+  }
+
+  .movie img {
+    height: 260px;
+  }
+
+  .movie-title {
+    font-size: 12px;
+  }
+}

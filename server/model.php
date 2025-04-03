@@ -18,29 +18,17 @@ define("DBNAME", "onillon4");
 define("DBLOGIN", "onillon4");
 define("DBPWD", "onillon4");
 
+
 function getAllMovies(){
     // Connexion à la base de données
-    $conn = new mysqli(HOST, DBLOGIN, DBPWD, DBNAME);
-
-    // Vérification de la connexion
-    if ($conn->connect_error) {
-        return false; // Erreur de connexion
-    }
-
-    // Requête SQL pour récupérer tous les films
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL pour récupérer le menu avec des paramètres
     $sql = "select id, name, image from Movie";
-    $result = $conn->query($sql);
-
-    // Vérification du résultat de la requête
-    if ($result === false) {
-        return false; // Erreur dans la requête SQL
-    }
-
-    // Récupération des résultats sous forme de tableau associatif
-    $movies = $result->fetch_all(MYSQLI_ASSOC);
-
-    // Fermeture de la connexion à la base de données
-    $conn->close();
-
-    return $movies; // Retourne le tableau des films
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);;
+    // Exécute la requête SQL
+    $stmt->execute();
+    // Récupère les résultats de la requête sous forme d'objets
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; // Retourne les résultats
 }
