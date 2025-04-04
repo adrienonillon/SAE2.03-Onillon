@@ -1,4 +1,8 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 /** ARCHITECTURE PHP SERVEUR : Rôle du fichier script.php
  * 
  * Ce fichier est celui à qui on adresse toutes les requêtes HTTP.
@@ -65,7 +69,7 @@ if ( isset($_REQUEST['todo']) ){
       http_response_code(400); // 400 == "Bad request"
       exit();
   }
-
+  
   /**
    * A ce stade, on a appelé la fonction de contrôleur appropriée et stocké le résultat dans la variable $data.
    * 

@@ -1,3 +1,7 @@
+body {
+    background-color: black;
+}
+
 .addMovie {
     width:30rem;
 }

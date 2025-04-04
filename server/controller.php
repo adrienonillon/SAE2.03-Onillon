@@ -25,11 +25,17 @@ function readMoviesController(){
     return $movies; 
 }
 
+
 function addController(){
     /* Lecture des données de formulaire
       On ne vérifie pas si les données sont valides, on suppose (faudra pas toujours...) que le client les a déjà
       vérifiées avant de les envoyer 
     */
+
+    header('Content-Type: application/json');
+echo json_encode($_REQUEST);
+exit();
+
     $name = $_REQUEST['name'];
     $year = $_REQUEST['year'];
     $length = $_REQUEST['length'];
@@ -46,7 +52,7 @@ function addController(){
       return "Le film $name est à été ajouté avec succès";
     }
     else{
-      return false;
+      return "Erreur lors de l'ajout du film $titre !";
     }
   }
 

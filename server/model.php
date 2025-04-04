@@ -58,3 +58,4 @@ function addMovie($n, $y, $l, $de, $di, $id, $img, $t, $m){
     $res = $stmt->rowCount(); 
     return $res; // Retourne le nombre de lignes affectées
 }
+
