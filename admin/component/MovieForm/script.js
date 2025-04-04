@@ -4,9 +4,9 @@ let template = await templateFile.text();
 let MovieForm = {};
 
 // Fonction pour formater les données du formulaire
-MovieForm.format = function (handler) {
+MovieForm.format = function () {
     let html = template;
-    html = html.replace('{{handler}}', handler);
+    html = html.replace('{{window.C.handleraddMovie()}}', "window.C.handleraddMovie()");
     return html;
 };
 

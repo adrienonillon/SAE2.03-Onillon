@@ -7,10 +7,10 @@
         <input required type="number" name="year" placeholder="Saisir l'année de sortie du film" pattern="[^0-9]*">
         <input required type="number" name="length" placeholder="Saisir la durée en minute du film" pattern="[^0-9]*">
         <input required type="text" name="description" placeholder="Saisir le synopsis" pattern="[^0-9]*" title="Numbers are not allowed">
-        <input required type="text" name="categorie" placeholder="Saisir le genre " pattern="[^0-9]*" title="Numbers are not allowed">
+        <input required type="text" name="id_category" placeholder="Saisir le genre " pattern="[^0-9]*" title="Numbers are not allowed">
         <input required type="text" name="image" placeholder="Saisir le lien  d'affiche " pattern="[^0-9]*" title="Numbers are not allowed">
         <input required type="text" name="trailer" placeholder="Saisir le lien  du trailer " pattern="[^0-9]*" title="Numbers are not allowed">
         <input required type="number" name="min_age" placeholder="Age minimum" min="3" max="18" >
-        <input onclick="{{handler}}" type="button" value="Update" name="todo">
+        <input onclick="{{window.C.handleraddMovie()}}" type="button" value="add" name="todo">
     </form>
 </div>

@@ -34,12 +34,12 @@ function getAllMovies(){
 }
 
 
-function addMovie($n, $y, $l, $de, $di, $img, $t, $m){
+function addMovie($n, $y, $l, $de, $di, $id, $img, $t, $m){
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD); 
     // Requête SQL de mise à jour du menu avec des paramètres
-    $sql = "INSERT INTO Movie (name, year, length, description, director, image, trailer, min_age) 
-            VALUES (:name, :year, :length, :description, :director, :image, :trailer, :min_age)";
+    $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age) 
+            VALUES (:name, :year, :length, :description, :director, :id_category, :image, :trailer, :min_age)";
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
     // Lie les paramètres aux valeurs
@@ -48,6 +48,7 @@ function addMovie($n, $y, $l, $de, $di, $img, $t, $m){
     $stmt->bindParam(':length', $l);
     $stmt->bindParam(':description', $de);
     $stmt->bindParam(':director', $di);
+    $stmt->bindParam(':id_category', $id);
     $stmt->bindParam(':image', $img);
     $stmt->bindParam(':trailer', $t);
     $stmt->bindParam(':min_age', $m);

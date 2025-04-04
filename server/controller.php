@@ -25,21 +25,25 @@ function readMoviesController(){
     return $movies; 
 }
 
-function updateController(){
+function addController(){
     /* Lecture des données de formulaire
       On ne vérifie pas si les données sont valides, on suppose (faudra pas toujours...) que le client les a déjà
       vérifiées avant de les envoyer 
     */
-    $semaine = $_REQUEST['semaine'];
-    $jour = $_REQUEST['jour'];
-    $entree = $_REQUEST['entree'];
-    $plat = $_REQUEST['plat'];
-    $dessert = $_REQUEST['dessert'];
+    $name = $_REQUEST['name'];
+    $year = $_REQUEST['year'];
+    $length = $_REQUEST['length'];
+    $description = $_REQUEST['description'];
+    $director = $_REQUEST['director'];
+    $id_category = $_REQUEST['id_category'];
+    $image = $_REQUEST['image'];
+    $trailer = $_REQUEST['trailer'];
+    $min_age = $_REQUEST['min_age'];
     // Mise à jour du menu à l'aide de la fonction updateMenu décrite dans model.php
-    $ok = updateMenu($semaine, $jour, $entree, $plat, $dessert);
+    $ok = addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age); 
     // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
     if ($ok!=0){
-      return "Le menu du $jour est à jour";
+      return "Le film $name est à été ajouté avec succès";
     }
     else{
       return false;

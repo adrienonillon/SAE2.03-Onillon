@@ -53,8 +53,8 @@ if ( isset($_REQUEST['todo']) ){
   // peut s'écrire aussi avec des if/else
   switch($todo){
 
-    case 'add':
-        $data = addMovie(); // on appelle la fonction de contrôle addMovie() pour ajouter un film
+    case 'addMovie':
+        $data = addController(); // on appelle la fonction de contrôle addMovie() pour ajouter un film
         break;
       case 'readmovies':
         $data = readMoviesController(); // on appelle la fonction de contrôle readMovies() pour lire les films
