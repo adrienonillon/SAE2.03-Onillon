@@ -32,9 +32,9 @@ function addController(){
       vérifiées avant de les envoyer 
     */
 
-    header('Content-Type: application/json');
-echo json_encode($_REQUEST);
-exit();
+    // header('Content-Type: application/json');
+    // echo json_encode($_REQUEST);
+    // exit();
 
     $name = $_REQUEST['name'];
     $year = $_REQUEST['year'];
@@ -45,6 +45,12 @@ exit();
     $image = $_REQUEST['image'];
     $trailer = $_REQUEST['trailer'];
     $min_age = $_REQUEST['min_age'];
+
+
+    // Vérification des données
+    if (empty($name) || empty($year) || empty($length) || empty($description) || empty($director) || empty($id_category) || empty($image) || empty($trailer) || empty($min_age)) {
+        return "Erreur : tous les champs sont obligatoires !";
+    }
     // Mise à jour du menu à l'aide de la fonction updateMenu décrite dans model.php
     $ok = addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age); 
     // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
@@ -52,7 +58,7 @@ exit();
       return "Le film $name est à été ajouté avec succès";
     }
     else{
-      return "Erreur lors de l'ajout du film $titre !";
+      return "Erreur lors de l'ajout du film $name !";
     }
   }
 
