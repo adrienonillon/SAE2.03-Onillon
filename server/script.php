@@ -49,23 +49,13 @@ if ( isset($_REQUEST['todo']) ){
   $todo = $_REQUEST['todo'];
 
 
-
-  if ($todo === "addMovie") {
-    header("Content-Type: application/json");
-
-    $data = json_decode(file_get_contents("php://input"), true);
-
-    if ($data && isset($data["name"], $data["image"], $data["description"])) {
-        $result = Controller::addMovie($data);
-        echo json_encode(["success" => $result]);
-    } else {
-        echo json_encode(["success" => false, "error" => "Données invalides"]);
-    }
-}
   // en fonction de la valeur de 'todo', on appelle la fonction de contrôle appropriée
   // peut s'écrire aussi avec des if/else
   switch($todo){
 
+    case 'add':
+        $data = addMovie(); // on appelle la fonction de contrôle addMovie() pour ajouter un film
+        break;
       case 'readmovies':
         $data = readMoviesController(); // on appelle la fonction de contrôle readMovies() pour lire les films
         break;

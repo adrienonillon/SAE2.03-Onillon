@@ -25,9 +25,24 @@ function readMoviesController(){
     return $movies; 
 }
 
-class Controller {
-    public static function addMovie($data) {
-        return Model::addMovie($data["name"], $data["image"], $data["description"]);
+function updateController(){
+    /* Lecture des données de formulaire
+      On ne vérifie pas si les données sont valides, on suppose (faudra pas toujours...) que le client les a déjà
+      vérifiées avant de les envoyer 
+    */
+    $semaine = $_REQUEST['semaine'];
+    $jour = $_REQUEST['jour'];
+    $entree = $_REQUEST['entree'];
+    $plat = $_REQUEST['plat'];
+    $dessert = $_REQUEST['dessert'];
+    // Mise à jour du menu à l'aide de la fonction updateMenu décrite dans model.php
+    $ok = updateMenu($semaine, $jour, $entree, $plat, $dessert);
+    // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
+    if ($ok!=0){
+      return "Le menu du $jour est à jour";
     }
-}
+    else{
+      return false;
+    }
+  }
 
