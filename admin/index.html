@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html lang="fr">
+  <head>
+    <title>SAE2.03 ADMIN</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/base.css" />
+  </head>
 
-<head>
-  <title>SAE2.03 ADMIN</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./css/base.css" />
-</head>
+  <body>
+    <section id="log"></section>
+    <section class="addMovie" id="content"></section>
 
-<body>
-  <section id="log"></section>
-  <section class="addMovie" id="content"></section>
+    <script type="module">
+      import { Log } from "./component/Log/script.js";
+      import { MovieForm } from "./component/MovieForm/script.js";
+      import { DataMovie } from "./data/dataMovie.js";
 
-  <script type="module">
-    import { Log } from "./component/Log/script.js";
-    import { MovieForm } from "./component/MovieForm/script.js";
-    import { DataMovie } from "./data/dataMovie.js";;
+      window.C = {};
 
-    window.C = {};
+      C.handleraddMovie = async function () {
+        let form = document.querySelector(".addMovie__form");
+        if (!form) {
+          console.error("Erreur : Formulaire introuvable !");
+          return;
+        }
+        let fd = new FormData(form);
+        let res = await DataMovie.addMovie(fd);
+        if (res) {
+          V.renderLog("Film ajouté avec succès !");
+        } else {
+          V.renderLog("Erreur lors de l'ajout du film.");
+        }
+      };
 
+      C.start = function () {
+        V.renderLog("Démarrage de l'application");
+        V.renderMovieForm(C.handleraddMovie);
+      };
 
-    C.handleraddMovie = async function () {
+      window.V = {};
 
-      let form = document.querySelector('.addMovie__form');
-      let fd = new FormData(form);
-      let res = await DataMovie.addMovie(fd);
-      if (res) {
-        V.renderLog("Film ajouté avec succès !");
-      } else {
-        V.renderLog("Erreur lors de l'ajout du film.");
-      }
-    }
+      V.renderLog = function (txt) {
+        let content = document.querySelector("#log");
+        content.innerHTML = Log.format(txt);
+      };
 
-    C.start = function () {
-      V.renderLog("Démarrage de l'application");
-      V.renderMovieForm("C.handleraddMovie()");
-    };
+      V.renderMovieForm = function (handler) {
+        let content = document.querySelector("#content");
+        content.innerHTML = MovieForm.format(handler);
+      };
 
-    window.V = {};
-
-    V.renderLog = function (txt) {
-      let content = document.querySelector("#log");
-      content.innerHTML = Log.format(txt);
-    };
-
-    V.renderMovieForm = function (handler) {
-      let content = document.querySelector('#content');
-      content.innerHTML = MovieForm.format(handler);
-    }
-
-    C.start();
-  </script>
-</body>
-
+      C.start();
+    </script>
+  </body>
 </html>
