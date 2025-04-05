@@ -11,15 +11,14 @@
     <header id="header"></header>
 
     <section class="movies-container" id="content"></section>
+    <section class="movies__container-detail" id="detail"></section>
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
       import { DataMovie } from "./data/dataMovie.js";
       import { Movie } from "./component/Movie/script.js";
+      import { MovieDetail } from "./component/MovieDetail/script.js";
 
-      // Controleur
-      // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
-      // Une fois l'application terminée, on pourrait remettre let C.
       window.C = {};
 
       C.handlerAbout = function () {
@@ -27,6 +26,11 @@
           "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
         );
       };
+      C.handlerDetail = async function (id) {
+        let detail = await DataMovie.requestMoviedetails(id);
+        V.renderMovieDetail(detail[0]);
+      };
+
 
       C.start = function () {
         V.renderNavBar("C.handlerAbout()");
@@ -35,38 +39,30 @@
 
       C.getMovie = async function () {
         let data = await DataMovie.requestMovies();
-        // On affiche les films
         V.renderMovie(data);
       };
 
-      // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
 
-      /**
-       * V.renderNavBar
-       *
-       * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
-       * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
-       * formaté par le composant NavBar.
-       */
       V.renderNavBar = function (hAbout) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(hAbout);
       };
 
-      /**
-       * V.renderMovie
-       *
-       * Cette fonction est responsable de l'affichage des films.
-       * Elle sélectionne l'élément HTML avec l'ID "content" et y insère le contenu
-       * formaté par le composant Movie.
-       */
       V.renderMovie = function (data) {
+        let content = document.querySelector("#content");
+        content.innerHTML = Movie.format(data);
         if (data.length === 0) {
           content.innerHTML = "<p>Aucun film disponible pour le moment.</p>";
         } else {
           content.innerHTML = Movie.formatMany(data);
         }
+      };
+
+      V.renderMovieDetail = function (handler) {
+        if (!data) return;
+        let content = document.querySelector("#detail");
+        content.innerHTML = MovieDetail.format(handler);
       };
       C.start(); // Démarre l'application
     </script>
