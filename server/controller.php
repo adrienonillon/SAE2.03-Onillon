@@ -9,36 +9,27 @@ function readMoviesController(){
 }
 
 
-function addController(){
+function addController() {
+  header('Content-Type: application/json');
 
 
-    // header('Content-Type: application/json');
-    // echo json_encode($_REQUEST);
-    // exit();
+      $name = $_REQUEST['name'];
+      $year = $_REQUEST['year'];
+      $length = $_REQUEST['length'];
+      $description = $_REQUEST['description'];
+      $director = $_REQUEST['director'];
+      $id_category = $_REQUEST['id_category'];
+      $image = $_REQUEST['image'];
+      $trailer = $_REQUEST['trailer'];
+      $min_age = $_REQUEST['min_age'];
 
-    $name = $_REQUEST['name'];
-    $year = $_REQUEST['year'];
-    $length = $_REQUEST['length'];
-    $description = $_REQUEST['description'];
-    $director = $_REQUEST['director'];
-    $id_category = $_REQUEST['id_category'];
-    $image = $_REQUEST['image'];
-    $trailer = $_REQUEST['trailer'];
-    $min_age = $_REQUEST['min_age'];
+      $ok = addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age);
 
-
+      if ($ok != 0) {
+          echo json_encode(["success" => true, "message" => "Film ajouté à la base de donnée"]);
+      } else {
+          echo json_encode(["success" => false, "message" => "Erreur lors de l'ajout du film"]);
+      }
   
-    if (empty($name) || empty($year) || empty($length) || empty($description) || empty($director) || empty($id_category) || empty($image) || empty($trailer) || empty($min_age)) {
-        return "Erreur : tous les champs sont obligatoires !";
-    }
- 
-    $ok = addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age); 
-
-    if ($ok!=0){
-      return "Le film $name est à été ajouté avec succès";
-    }
-    else{
-      return "Erreur lors de l'ajout du film $name !";
-    }
-  }
-
+  exit();
+}
