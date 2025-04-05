@@ -8,6 +8,14 @@ function readMoviesController(){
     return $movies; 
 }
 
+function readMovieDetails(){
+    $id = $_REQUEST['id'];
+    $movie = MovieDetails($id);
+    if (!$movie) {
+        return false;
+    }
+    return $movie[0]; 
+}
 
 function addController() {
   header('Content-Type: application/json');
