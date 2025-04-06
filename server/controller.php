@@ -42,3 +42,9 @@ function addController() {
   
   exit();
 }
+
+function readControllerMoviecategorie(){
+    $categorie = $_REQUEST['categorie'] ?? null;  
+    return getMoviecategorie($categorie);
+  }
+  

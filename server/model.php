@@ -62,3 +62,20 @@ function readMovieDetail($id){
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res; // Retourne les résultats
 }
+
+function readCategory($category){
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL pour récupérer les informations du film en fonction du nom
+    $sql = "SELECT Movie.id, Movie.name, image 
+            FROM Movie 
+            INNER JOIN Category ON Movie.id_category = Category.id 
+            WHERE LOWER(Category.name) = LOWER(:categorie)
+";
+
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':category', $category   , PDO::PARAM_STR);
+    $stmt->execute(); 
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; 
+}
