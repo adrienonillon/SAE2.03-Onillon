@@ -2,21 +2,23 @@ let templateFile = await fetch("./component/Movie/template.html");
 let template = await templateFile.text();
 
 let Movie = {};
+Movie.format = function (movies) {
+  if (movies.length === 0) {
+    return "<p>Il n'y a pas de films disponibles.</p>";
+  }
 
-Movie.format = function(movie) { 
-    let html = template;
-    html = html.replace('{{image}}', movie.image);
-    html = html.replace('{{id}}', movie.id);
-    html = html.replace('{{title}}', movie.name);
-    return html;
-}
+  let html = "";
+  movies.forEach((movie) => {
+    let movieHtml = template;
+    movieHtml = movieHtml.replace("{{image}}", movie.image);
+    movieHtml = movieHtml.replace("{{title}}", movie.name);
+    movieHtml = movieHtml.replace("{{description}}", movie.description);
+    movieHtml = movieHtml.replace("{{handler}}", `C.handlerDetail(${movie.id})`);
 
-Movie.formatMany = function(movies) { 
-    let html = '';
-    for (const movie of movies) {  
-        html += Movie.format(movie);  
-    }
-    return html;
-}
+    html += movieHtml;
+  });
+
+  return html;
+};
 
 export { Movie };

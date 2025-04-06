@@ -8,14 +8,15 @@ function readMoviesController(){
     return $movies; 
 }
 
-function readMovieDetails(){
-    $id = $_REQUEST['id'];
-    $movie = MovieDetails($id);
-    if (!$movie) {
-        return false;
+function readMovieDetailController(){
+    $id = $_REQUEST['id'] ?? null;
+  
+    if (empty($id)) {
+        return "Erreur : Tous les champs doivent être remplis.";
     }
-    return $movie[0]; 
-}
+  
+    return readMovieDetail($id);
+  }
 
 function addController() {
   header('Content-Type: application/json');

@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+  }
+  
+  .movie__container-detail {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+    min-height: 100vh;
+    width: 100vw;
+  }
+  
+  .movie__detail {
+    background-color: #121212;
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+    transition: transform 0.3s ease;
+  }
+  
+  .movie__detail:hover {
+    transform: scale(1.01);
+  }
+  
+  .movie__detail img {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.2);
+  }
+  
+  .movie__title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #007bff;
+    text-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .movie__description {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #cccccc;
+    line-height: 1.6;
+  }
+  
+  .movie__detail p {
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+    color: #bbbbbb;
+  }
+  
+  .movie__detail p strong {
+    color: #ffffff;
+  }
+  
+  iframe {
+    margin-top: 2rem;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.2);
+    border: none;
+  }
+  
+  /* Responsive pour mobile */
+  @media screen and (max-width: 768px) {
+    .movie__detail {
+      padding: 1rem;
+    }
+  
+    .movie__title {
+      font-size: 1.5rem;
+    }
+  
+    iframe {
+      height: 250px;
+    }
+  }

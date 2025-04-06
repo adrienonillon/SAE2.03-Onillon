@@ -15,8 +15,8 @@ if ( isset($_REQUEST['todo']) ){
 
   switch($todo){
 
-      case 'readMovieDetails':
-        $data = getMovieDetailsController();
+      case'readMovieDetail':
+      $data = readMovieDetailController();
       break;
 
       case 'addMovie':
