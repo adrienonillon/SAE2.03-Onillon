@@ -14,14 +14,14 @@ if ( isset($_REQUEST['todo']) ){
 
 
   switch($todo){
-      
-      case 'readCategory':
-      $data = readCategoryController();
+
+    case 'getCategory':
+      $data = readMoviesByCategoryController();
       break;
 
       case'readMovieDetail':
-      $data = readMovieDetailController();
-      break;
+        $data = readMovieDetailController();
+        break;
 
       case 'addMovie':
         $data = addController();

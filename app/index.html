@@ -10,14 +10,14 @@
   <body>
     <header id="header"></header>
 
-    <section class="movies-container" id="content"></section>
-    <section id="category"></section>
+    <section   id="content"></section>
     
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
       import { DataMovie } from "./data/dataMovie.js";
       import { Movie } from "./component/Movie/script.js";
       import { MovieDetail } from "./component/MovieDetail/script.js";
+      import { MovieCategory } from "./component/MovieCategory/script.js";
 
       window.C = {};
 
@@ -27,24 +27,21 @@
 
       C.handlerDetail = async function (id) {
         let details = await DataMovie.requestMovieDetails(id);
-        V.renderMovieDetail(details[0]);
+        V.renderMovieDetails(details[0]);
       };
-
-      C.handlerCategory = async function (category) {
-        let data = await DataMovie.requestMovieCategory(category);
-        V.renderMovie(data);
-      };
-
 
       C.start = function () {
-        V.renderNavBar("C.handlerAbout()");
+        V.renderNavBar("C.handlerAbout()","C.handlerMovies()" );
         C.getMovie();
+        V.renderMovieDetails();
       };
 
       C.getMovie = async function () {
-        let data = await DataMovie.requestMovies();
-        V.renderMovie(data);
+        let data = await DataMovie.requestMoviesCategory();
+        V.renderMovieCategory(data);
       };
+
+
 
       window.V = {};
 
@@ -59,15 +56,15 @@
       };
 
       
-      V.renderMovieDetail = function (data) {
+      V.renderMovieDetails = function (data) {
         if (!data) return;
         let content = document.querySelector("#content");
         content.innerHTML = MovieDetail.format(data);
       };
 
-      V.renderCategory = function (data) {
-        let content = document.querySelector("#category");
-        content.innerHTML = Movie.format(data);
+      V.renderMovieCategory = function (data) {
+        let content = document.querySelector("#content");
+        content.innerHTML = data.map(MovieCategory.format).join("");
       };
 
       C.start(); 

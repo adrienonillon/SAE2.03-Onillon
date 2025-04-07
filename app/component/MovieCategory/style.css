@@ -1,0 +1,14 @@
+.category {
+  margin-bottom: 2rem;
+  display: block; 
+}
+
+.category-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.category-movies {
+  display: flex;
+  flex-wrap: wrap;
+}

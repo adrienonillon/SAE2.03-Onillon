@@ -21,12 +21,10 @@ DataMovie.requestMovieDetails = async function(id){
     return movie;
 }
 
-DataMovie.requestMovieCategory = async function(category){
-    let answer = await fetch(HOST_URL + "/server/script.php?todo=readMovieCategory&category=" + category);
-    
-    let movie = await answer.json();
-
-    return movie;
-}
+DataMovie.requestMoviesCategory = async function () {
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=getCategory");
+    let categories = await answer.json();
+    return categories;
+  };
 
 export {DataMovie};

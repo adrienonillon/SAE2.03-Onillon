@@ -32,8 +32,13 @@ ol[role='list'] {
 body {
   min-height: 100vh;
   line-height: 1.5;
+    margin: 0;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
 }
-
+body::-webkit-scrollbar {
+  display: none;
+}
 h1, h2, h3, h4,
 button, input, label {
   line-height: 1.1;
