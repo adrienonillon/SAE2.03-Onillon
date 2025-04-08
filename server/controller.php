@@ -47,3 +47,25 @@ function readMoviesByCategoryController() {
     $categories = getMoviesByCategory();
     return $categories ? $categories : false;
 }
+
+
+function addProfileController(){
+    $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
+    $name = $_REQUEST['name'] ?? null;
+    $image = $_REQUEST['image'] ?? null;
+    $datenaissance = $_REQUEST['datenaissance'] ?? null;
+
+   
+    if (empty($name) || empty($datenaissance)) {
+        return "Erreur : Tous les champs doivent être remplis.";
+    }
+    
+    $ok = addProfile($id, $name, $image, $datenaissance);
+   
+    if ($ok!=0){
+      return "L'utilisateur $name a été ajouté avec succès !";
+    } 
+    else{
+      return "Erreur lors de l'ajout de $name !";
+    }
+  }

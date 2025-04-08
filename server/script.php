@@ -15,6 +15,10 @@ if ( isset($_REQUEST['todo']) ){
 
   switch($todo){
 
+    case 'addProfile':
+      $data = addProfileController();
+    break;
+
     case 'getCategory':
       $data = readMoviesByCategoryController();
       break;

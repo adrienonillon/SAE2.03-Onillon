@@ -99,3 +99,20 @@ function getMoviesByCategory() {
         return false;
     }
 }
+
+function addProfile($id, $name, $image, $datenaissance) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+
+    $sql = "INSERT INTO Profil (id, name, image, datenaissance) 
+            VALUES (:id, :name, :image, :datenaissance)";
+
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->bindParam(':image', $image, PDO::PARAM_STR);
+    $stmt->bindParam(':datenaissance', $datenaissance, PDO::PARAM_STR);
+
+    $stmt->execute();
+    $res = $stmt->rowCount();
+    return $res; 
+}
