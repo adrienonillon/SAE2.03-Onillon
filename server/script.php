@@ -15,6 +15,10 @@ if ( isset($_REQUEST['todo']) ){
 
   switch($todo){
 
+    case 'readProfile':
+      $data = readProfileController();
+    break;
+
     case 'addProfile':
       $data = addProfileController();
     break;

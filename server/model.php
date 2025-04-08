@@ -100,19 +100,26 @@ function getMoviesByCategory() {
     }
 }
 
-function addProfile($id, $name, $image, $datenaissance) {
+function addProfile($id, $name, $image, $age) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
 
-    $sql = "INSERT INTO Profil (id, name, image, datenaissance) 
-            VALUES (:id, :name, :image, :datenaissance)";
+    $sql = "INSERT INTO Profil (id, name, image, age) 
+            VALUES (:id, :name, :image, :age)";
 
     $stmt = $cnx->prepare($sql);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':image', $image, PDO::PARAM_STR);
-    $stmt->bindParam(':datenaissance', $datenaissance, PDO::PARAM_STR);
+    $stmt->bindParam(':age', $age, PDO::PARAM_STR);
 
     $stmt->execute();
     $res = $stmt->rowCount();
     return $res; 
+}
+
+function readProfile() {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT id, name, image, age FROM Profil";
+    $stmt = $cnx->query($sql);
+    return $stmt->fetchAll(PDO::FETCH_OBJ); 
 }

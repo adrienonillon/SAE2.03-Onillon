@@ -19,3 +19,4 @@ DataProfile.addProfile = async function (fdata) {
 };
 
 export { DataProfile };
+

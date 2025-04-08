@@ -10,64 +10,84 @@
   <body>
     <header id="header"></header>
 
-    <section  class="movies-container" id="content"></section>
-    
+    <section class="movies-container" id="content"></section>
+
     <script type="module">
-      import { NavBar } from "./component/NavBar/script.js";
-      import { DataMovie } from "./data/dataMovie.js";
-      import { Movie } from "./component/Movie/script.js";
-      import { MovieDetail } from "./component/MovieDetail/script.js";
-      import { MovieCategory } from "./component/MovieCategory/script.js";
+        import { NavBar } from "./component/NavBar/script.js";
+        import { DataMovie } from "./data/dataMovie.js";
+        import { DataProfile } from "./data/dataProfile.js";
+        import { Movie } from "./component/Movie/script.js";
+        import { MovieDetail } from "./component/MovieDetail/script.js";
+        import { MovieCategory } from "./component/MovieCategory/script.js";
 
-      window.C = {};
+        window.C = {};
 
-      C.handlerMovies = function () {
-        C.getMovie();
+        let activeProfileId = 0;
+        let activeProfileAge = 0;
+
+        C.handlerMovies = function () {
+          C.getMovie();
+        };
+
+        C.handlerDetail = async function (id) {
+          let details = await DataMovie.requestMovieDetails(id);
+          V.renderMovieDetails(details[0]);
+        };
+
+        C.start = async function () {
+          let hProfile = await DataProfile.readProfile();
+        if (hProfile.length > 0) {
+          activeProfileId = hProfile[0].id;
+          activeProfileAge = hProfile[0].age;
+        }
+
+          V.renderNavBar("C.handlerMovies()", hProfile);
+          V.renderMovieDetails();
+          C.getMovie();
+        };
+
+        C.getMovie = async function () {
+          let data = await DataMovie.requestMoviesCategory();
+          V.renderMovieCategory(data);
+        };
+
+        C.changeProfile = async function (newId) {
+        newId = parseInt(newId);
+        const hProfile = await DataProfile.readProfile();
+
+        const selected = hProfile.find(p => p.id === newId);
+
+        if (selected) {
+          activeProfileId = selected.id;
+          activeProfileAge = selected.age;
+          C.getMovie();
+        }
       };
 
-      C.handlerDetail = async function (id) {
-        let details = await DataMovie.requestMovieDetails(id);
-        V.renderMovieDetails(details[0]);
-      };
+        window.V = {};
 
-      C.start = function () {
-        V.renderNavBar("C.handlerAbout()","C.handlerMovies()" );
-        C.getMovie();
-        V.renderMovieDetails();
-      };
-
-      C.getMovie = async function () {
-        let data = await DataMovie.requestMoviesCategory();
-        V.renderMovieCategory(data);
-      };
-
-
-
-      window.V = {};
-
-      V.renderNavBar = function (hAbout) {
+        V.renderNavBar = function (hHome, hProfile) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout);
+        header.innerHTML = NavBar.format(hHome, hProfile,); 
       };
 
-      V.renderMovie = function (data) {
-        let content = document.querySelector("#content");
-        content.innerHTML = Movie.format(data);
-      };
+        V.renderMovie = function (data) {
+          let content = document.querySelector("#content");
+          content.innerHTML = Movie.format(data);
+        };
 
-      
-      V.renderMovieDetails = function (data) {
-        if (!data) return;
-        let content = document.querySelector("#content");
-        content.innerHTML = MovieDetail.format(data);
-      };
+        V.renderMovieDetails = function (data) {
+          if (!data) return;
+          let content = document.querySelector("#content");
+          content.innerHTML = MovieDetail.format(data);
+        };
 
-      V.renderMovieCategory = function (data) {
-        let content = document.querySelector("#content");
-        content.innerHTML = data.map(MovieCategory.format).join("");
-      };
+        V.renderMovieCategory = function (data) {
+          let content = document.querySelector("#content");
+          content.innerHTML = data.map(MovieCategory.format).join("");
+        };
 
-      C.start(); 
+        C.start();
     </script>
   </body>
 </html>
