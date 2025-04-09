@@ -1,11 +1,18 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
 .navbar__list {
   display: flex;
   align-items: center;
-
-  width: 100%; 
   margin: 0;
   padding: 0;
-  padding: 0.5rem 1rem;
+  list-style: none;
 }
 
 .navbar__item {
@@ -20,9 +27,8 @@
 
 .navbar__item:hover {
   --_offset: 0.5rem;
+  color: #007bff;
 }
-
-
 
 .navbar__select {
   padding: 0.5rem;
@@ -39,4 +45,10 @@
   border-radius: 50%;
   object-fit: cover;
   margin-left: 0.5rem; 
+}
+
+.navbar__profil {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
 }
