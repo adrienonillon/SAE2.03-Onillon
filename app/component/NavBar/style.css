@@ -1,15 +1,15 @@
 .navbar__list {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Ajout pour espacer les éléments */
-  width: 100%; /* S'assurer que la liste prend toute la largeur */
+
+  width: 100%; 
   margin: 0;
   padding: 0;
+  padding: 0.5rem 1rem;
 }
 
 .navbar__item {
   --_offset: 0.2rem;
-  padding: 0.5rem 1rem;
   list-style: none;
   text-decoration: underline;
   text-decoration-thickness: 0.1rem;
@@ -22,11 +22,21 @@
   --_offset: 0.5rem;
 }
 
-#profile__select {
+
+
+.navbar__select {
   padding: 0.5rem;
   border: 1px solid var(--color-bg);
   border-radius: 0.25rem;
   background-color: var(--color-bg);
   color: var(--color-fg);
   cursor: pointer;
+}
+
+.navbar__image {
+  width: 2rem; 
+  height: 2rem; 
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 0.5rem; 
 }

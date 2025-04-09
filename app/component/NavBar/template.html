@@ -1,15 +1,20 @@
 <nav class="navbar font-sans">
   <ul class="navbar__list">
     <li class="navbar__item" onclick="window.location.href='index.html'">Home</li>
-    <li class="navbar__item">
-      <select name="profile" id="profile__select" onchange="C.changeProfile(this.value)">
-        {{hProfile}}
-      </select>
+    <select id="profile-select" class="navbar__select" onchange="{{handler}}">
+      {{profile}}
+    </select>
   </li>
-  <!-- <img
-  id="profile-picture"
-  class="navbar__picture"
-  src="https://mmi.unilim.fr/~onillon4/SAE/SAE2.03/server/images/{{image}}"
-  alt=""/> -->
+  <img
+  id="profile-image"
+  class="navbar__image"
+  src="https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/server/images/{{image}}"
+  alt="Photo de profil"
+/>
   </ul>
 </nav>
+
+
+
+
+  
