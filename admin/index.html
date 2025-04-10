@@ -62,6 +62,13 @@
         V.renderLog(res);
       };
 
+      C.handlerProfileModify = async function () {
+        let form = document.querySelector(".modifyProfile__form");
+        let fd = new FormData(form);
+        let res = await DataProfile.modify(fd);
+        V.renderLog(res);
+      };
+
       C.start = function () {
         V.renderLog("Démarrage de l'application");
         V.renderForm("C.handlerAddMovie()");
@@ -87,6 +94,10 @@
         content.innerHTML = ProfileForm.format(handler);
       };
 
+      V.renderModifyProfile = function (data) {
+        let content = document.querySelector("#ModifyProfile");
+        content.innerHTML = ModifyProfile.format(data);
+      };
       C.start();
     </script>
   </body>

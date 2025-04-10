@@ -85,3 +85,24 @@ function readMoviesByCategoryController() {
   $categories = getMoviesByCategory($age); 
   return $categories ? $categories : false;
 }
+
+function updateProfileController() {
+  
+  $id = intval($_POST['id']);
+  $name = $_POST['name'];
+  $image = $_POST['image'];
+  $age = $_POST['age'];
+
+  if (empty($id) || empty($name) || empty($image) || empty($age)) {
+     
+      return ["message" => "Tous les champs doivent être remplis."];
+  }
+
+  $result = modifyProfile($id, $name, $image, $age);
+
+  if ($result) {
+      return ["message" => "Profil modifié avec succès."];
+  } else {
+      return ["message" => "Erreur lors de la modification du profil."];
+  }
+} 
