@@ -67,11 +67,17 @@
 
 
       C.handlerProfile = async function () {
-        const select = document.querySelector("#profile-select");
-        let dataProfile = await DataProfile.readOne(select.value);
-        C.profile = dataProfile[0];
-        C.getMovie(C.profile.age);
-      };
+    const select = document.querySelector("#profile-select");
+    let dataProfile = await DataProfile.readOne(select.value);
+    C.profile = dataProfile[0];
+
+    const profileImage = document.querySelector("#profile-image");
+    if (profileImage && C.profile.image) {
+        profileImage.src = `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/server/images/${C.profile.image}`;
+    }
+
+    C.getMovie(C.profile.age);
+};
       
 
       window.V = {};
