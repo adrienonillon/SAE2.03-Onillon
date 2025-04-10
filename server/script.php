@@ -23,10 +23,6 @@ if ( isset($_REQUEST['todo']) ){
       $data = addProfileController();
     break;
 
-    case 'getCategory':
-      $data = readMoviesByCategoryController();
-      break;
-
       case'readMovieDetail':
         $data = readMovieDetailController();
         break;
@@ -38,6 +34,10 @@ if ( isset($_REQUEST['todo']) ){
       case 'readmovies':
         $data = readMoviesController(); 
         break;
+
+      case 'readMoviesCategory': 
+        $data = readMoviesByCategoryController();
+      break;
     
         default: 
       echo json_encode('[error] Unknown todo value');

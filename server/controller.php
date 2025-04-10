@@ -43,34 +43,45 @@ function addController() {
   exit();
 }
 
-function readMoviesByCategoryController() {
-    $categories = getMoviesByCategory();
-    return $categories ? $categories : false;
-}
 
 
 function addProfileController(){
-    $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
-    $name = $_REQUEST['name'] ?? null;
-    $image = $_REQUEST['image'] ?? null;
-    $age = $_REQUEST['age'] ?? null;
-
-   
-    if (empty($name) || empty($age)) {
-        return "Erreur : Tous les champs doivent être remplis.";
-    }
-    
-    $ok = addProfile($id, $name, $image, $age);
-   
-    if ($ok!=0){
-      return "L'utilisateur $name a été ajouté avec succès !";
-    } 
-    else{
-      return "Erreur lors de l'ajout de $name !";
-    }
+  $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
+  $name = $_REQUEST['name'] ?? null;
+  $image = $_REQUEST['image'] ?? null;
+  $age = $_REQUEST['age'] ?? null;
+  
+  
+  if (empty($name) || empty($age)) {
+    return "Erreur : Tous les champs doivent être remplis.";
   }
+  
+  $ok = addProfile($id, $name, $image, $age);
+  
+  if ($ok!=0){
+    return "L'utilisateur $name a été ajouté avec succès !";
+  } 
+  else{
+    return "Erreur lors de l'ajout de $name !";
+  }
+}
 
-  function readProfileController() {
+function readProfileController() {
+  if (!isset($_REQUEST['id'])) {
     $profiles = readProfile(); 
-    return $profiles ? $profiles : false;
+  }
+  else{
+    $id = $_REQUEST['id'];
+    $profiles = readOneProfile($id); 
+  }
+ 
+  return $profiles;
+}
+
+
+
+function readMoviesByCategoryController() {
+  $age = isset($_REQUEST['age']) ? intval($_REQUEST['age']) : 0; 
+  $categories = getMoviesByCategory($age); 
+  return $categories ? $categories : false;
 }

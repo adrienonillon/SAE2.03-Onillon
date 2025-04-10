@@ -9,12 +9,11 @@ DataProfile.readProfile = async function () {
     return profile;
   };
   
-  // DataProfile.requestMovies = async function () {
-  //     let answer = await fetch(
-  //       HOST_URL + "/server/script.php?todo=readMovies&age=7" );
-  //     let profile = await answer.json();
-  //     console.log(profile);
-  //     return profile;
-  //   };
+  DataProfile.readOne = async function (id) {
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=readProfile&id=" + id);
+    
+    let res = await answer.json();
+    return res;
+  };
 
   export { DataProfile };

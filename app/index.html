@@ -22,16 +22,17 @@
 
       window.C = {};
 
-      let activeProfileId = 0;
-      let activeProfileAge = 0;
 
-      C.handlerMovies = function () {
-        C.getMovie();
-      };
 
-      C.handlerDetail = async function (id) {
-        let details = await DataMovie.requestMovieDetails(id);
-        V.renderMovieDetails(details[0]);
+      C.profile = null;
+      C.getMovie = async function (age) {
+        let data = await DataMovie.requestMovies(age);
+        if (!Array.isArray(data) || data.length === 0) {
+          document.querySelector("#content").innerHTML =
+            "<p>Aucun film disponible pour votre tranche d'âge.</p>";
+          return;
+        }
+        V.renderMovieCategory(data);
       };
       
       C.start = async function () {
@@ -39,45 +40,38 @@
         V.renderNavBar("C.handlerMovies()", "C.handlerProfile()", profiles);
         V.renderMovieDetails();
         C.getMovie();
+        C.getCategories();
       };
-
-
-      C.getMovie = async function () {
-        let data = await DataMovie.requestMoviesCategory();
-        V.renderMovieCategory(data);
+      
+      C.handlerDetail = async function (id) {
+        let details = await DataMovie.requestMovieDetails(id);
+        V.renderMovieDetails(details[0]);
       };
+      
 
-      C.changeProfile = async function (newId) {
-        newId = parseInt(newId);
-        const profiles = await DataProfile.readProfile();
-
-        const selected = profiles.find((p) => p.id === newId);
-
-        if (selected) {
-          activeProfileId = selected.id;
-          console.log("Profil sélectionné :", selected);
-          C.getMovie();
+      C.getCategories = async function () {
+        if (!C.profile) {
+          document.querySelector("#content").innerHTML =
+            "<p>Veuillez sélectionner un profil.</p>";
+          return;
         }
+        let categories = await DataMovie.requestMovies(99);
+        if (!Array.isArray(categories) || categories.length === 0) {
+          document.querySelector("#content").innerHTML =
+            "<p>Aucune catégorie disponible pour votre tranche d'âge.</p>";
+          return;
+        }
+        V.renderMovieCategory(categories); 
       };
+
+
 
       C.handlerProfile = async function () {
-    const select = document.querySelector("#profile-select");
-    const selectedOption = select.selectedOptions[0];
-    const profileName = selectedOption.value;
-    const dob = selectedOption.getAttribute("data-dob");
-    const imageFilename = selectedOption.getAttribute("data-img");
-    const picture = document.querySelector("#profile-image");
-    const base = "https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/server/images/";
-
-
-    picture.src = base + imageFilename;
-
-   
-    let data = await DataMovie.requestMoviesCategory(); 
-
-
-    V.renderMovieCategory(data);
-};
+        const select = document.querySelector("#profile-select");
+        let dataProfile = await DataProfile.readOne(select.value);
+        C.profile = dataProfile[0];
+        C.getMovie(C.profile.age);
+      };
       
 
       window.V = {};
@@ -100,7 +94,11 @@
 
       V.renderMovieCategory = function (data) {
         let content = document.querySelector("#content");
-        content.innerHTML = data.map(MovieCategory.format).join("");
+        let formattedContent = "";
+        for (let category of data) {
+          formattedContent += MovieCategory.format(category);
+        }
+        content.innerHTML = formattedContent;
       };
 
       C.start();
