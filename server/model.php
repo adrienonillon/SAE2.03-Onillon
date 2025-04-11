@@ -142,21 +142,23 @@ function readOneProfile($id) {
     return $res; 
 }
 
-function updateProfile($id, $name, $image, $age) {
-
-    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]);
-
-    $sql = "UPDATE Profile 
+function updateProfile($name, $image, $age, $id) {
+ 
+    
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    
+    $sql = "UPDATE Profil 
             SET name = :name, image = :image, age = :age 
             WHERE id = :id";
-
+    
     $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-    $stmt->bindParam(':image', $image, PDO::PARAM_STR);
-    $stmt->bindParam(':age', $age, PDO::PARAM_STR);
-
-    return $stmt->execute();
+   
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':image', $image);
+    $stmt->bindParam(':age', $age);
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    
+    $res = $stmt->rowCount(); 
+    return $res; 
 }

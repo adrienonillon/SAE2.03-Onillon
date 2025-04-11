@@ -17,7 +17,7 @@ if ( isset($_REQUEST['todo']) ){
 
     case 'updateProfile':
       $data = updateProfileController();
-      break;
+    break;
 
     case 'readProfile':
       $data = readProfileController();
@@ -27,21 +27,21 @@ if ( isset($_REQUEST['todo']) ){
       $data = addProfileController();
     break;
 
-      case'readMovieDetail':
-        $data = readMovieDetailController();
-        break;
+    case'readMovieDetail':
+      $data = readMovieDetailController();
+    break;
 
-      case 'addMovie':
-        $data = addController();
-      break;
+    case 'addMovie':
+      $data = addController();
+    break;
 
-      case 'readmovies':
-        $data = readMoviesController(); 
-        break;
+    case 'readmovies':
+      $data = readMoviesController(); 
+    break;
 
-      case 'readMoviesCategory': 
-        $data = readMoviesByCategoryController();
-      break;
+    case 'readMoviesCategory': 
+      $data = readMoviesByCategoryController();
+    break;
     
         default: 
       echo json_encode('[error] Unknown todo value');
