@@ -96,6 +96,6 @@ function updateProfileController() {
         return "Erreur : Tous les champs obligatoires doivent être remplis.";
     }
 
-    $ok = updateProfile($id, $name, $image, $age);
+    $ok = updateProfile($name, $image, $age, $id);
     return $ok ? "Le profil a été modifié avec succès." : "Erreur lors de la modification du profil.";
 }

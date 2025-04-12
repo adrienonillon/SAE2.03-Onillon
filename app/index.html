@@ -22,8 +22,6 @@
 
       window.C = {};
 
-
-
       C.profile = null;
       C.getMovie = async function (age) {
         let data = await DataMovie.requestMovies(age);
@@ -34,7 +32,7 @@
         }
         V.renderMovieCategory(data);
       };
-      
+
       C.start = async function () {
         let profiles = await DataProfile.readProfile();
         V.renderNavBar("C.handlerMovies()", "C.handlerProfile()", profiles);
@@ -42,12 +40,20 @@
         C.getMovie();
         C.getCategories();
       };
-      
+
       C.handlerDetail = async function (id) {
         let details = await DataMovie.requestMovieDetails(id);
         V.renderMovieDetails(details[0]);
       };
-      
+
+      C.goHome = function () {
+        if (C.profile) {
+          C.getMovie(C.profile.age); n
+        } else {
+          document.querySelector("#content").innerHTML =
+            "<p>Veuillez sélectionner un profil.</p>";
+        }
+      };
 
       C.getCategories = async function () {
         if (!C.profile) {
@@ -61,24 +67,28 @@
             "<p>Aucune catégorie disponible pour votre tranche d'âge.</p>";
           return;
         }
-        V.renderMovieCategory(categories); 
+        V.renderMovieCategory(categories);
       };
 
-
-
       C.handlerProfile = async function () {
-    const select = document.querySelector("#profile-select");
-    let dataProfile = await DataProfile.readOne(select.value);
-    C.profile = dataProfile[0];
+        const select = document.querySelector("#profile-select");
+        const profileImage = document.querySelector("#profile-image");
 
-    const profileImage = document.querySelector("#profile-image");
-    if (profileImage && C.profile.image) {
-        profileImage.src = `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/server/images/${C.profile.image}`;
-    }
+        if (!select.value) {
+          // Si aucun profil n'est sélectionné, on met l'image par défaut
+          profileImage.src = `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/server/images/default-avatar.png`;
+          return;
+        }
 
-    C.getMovie(C.profile.age);
-};
-      
+        let dataProfile = await DataProfile.readOne(select.value);
+        C.profile = dataProfile[0];
+
+        if (C.profile && C.profile.image) {
+          profileImage.src = `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/server/images/${C.profile.image}`;
+        }
+
+        C.getMovie(C.profile.age);
+      };
 
       window.V = {};
 
