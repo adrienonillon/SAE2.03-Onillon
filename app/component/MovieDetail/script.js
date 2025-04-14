@@ -1,3 +1,4 @@
+
 let templateFile = await fetch("./component/MovieDetail/template.html");
 let template = await templateFile.text();
 
@@ -14,7 +15,7 @@ MovieDetail.format = function(movie) {
     html = html.replace('{{id_category}}', movie.category_name);
     html = html.replace('{{min_age}}', movie.min_age);
     html = html.replace('{{trailer}}', movie.trailer);
-
+    html = html.replace('{{id}}', movie.id);
 
     return html;
 }

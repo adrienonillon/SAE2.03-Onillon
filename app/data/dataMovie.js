@@ -22,4 +22,21 @@ DataMovie.requestMoviesCategory = async function () {
     return categories;
   };
 
+DataMovie.addFavoris = async function (id_profil, id_movie) {
+  let answer = await fetch(
+    HOST_URL + "/server/script.php?todo=addFavoris&id_profil=" + id_profil + "&id_movie=" + id_movie
+  );
+
+  let data = await answer.json();
+  return data;
+};
+DataMovie.removeFavoris = async function (id_profil, id_movie) {
+  let answer = await fetch(
+    HOST_URL + "/server/script.php?todo=removeFavoris&id_profil=" + id_profil + "&id_movie=" + id_movie
+  );
+
+  let data = await answer.json();
+  return data;
+};
+
 export {DataMovie};

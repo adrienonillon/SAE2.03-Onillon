@@ -99,3 +99,36 @@ function updateProfileController() {
     $ok = updateProfile($name, $image, $age, $id);
     return $ok ? "Le profil a été modifié avec succès." : "Erreur lors de la modification du profil.";
 }
+
+function addFavorisController() {
+    $id_profil = $_REQUEST['id_profil'] ?? null;
+    $id_movie = $_REQUEST['id_movie'] ?? null;
+
+    if (isFavoris($id_movie, $id_profil)) {
+        return ["error" => "Ce film est déjà dans les favoris."];
+    }
+
+    $result = addFavoris($id_movie, $id_profil);
+    if ($result) {
+        return ["success" => "Film ajouté aux favoris."];
+    } else {
+        return ["error" => "Impossible d'ajouter le film aux favoris."];
+    }
+}
+
+function readFavorisController() {
+  $id_profil = $_REQUEST['id_profil'] ?? null;
+  $favoris = getFavoris($id_profil);
+  return $favoris ? $favoris : [];
+}
+
+function removeFavorisController() {
+  $id_profil = $_REQUEST['id_profil'] ?? null;
+  $id_movie = $_REQUEST['id_movie'] ?? null;
+  $result = removeFavoris($id_movie, $id_profil);
+  if ($result) {
+      return ["success" => "Film supprimé des favoris."];
+  } else {
+      return ["error" => "Impossible de supprimer le film des favoris."];
+  }
+}

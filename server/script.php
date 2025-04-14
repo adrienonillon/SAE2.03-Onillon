@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 require("controller.php");
 
@@ -14,6 +17,18 @@ if ( isset($_REQUEST['todo']) ){
 
 
   switch($todo){
+
+    case 'removeFavoris':
+      $data = removeFavorisController();
+      break;
+      
+    case 'addFavoris': 
+      $data = addFavorisController();
+    break;
+        
+    case 'readFavoris':
+      $data = readFavorisController();
+    break;
 
     case 'updateProfile':
       $data = updateProfileController();
@@ -42,6 +57,7 @@ if ( isset($_REQUEST['todo']) ){
     case 'readMoviesCategory': 
       $data = readMoviesByCategoryController();
     break;
+
     
         default: 
       echo json_encode('[error] Unknown todo value');

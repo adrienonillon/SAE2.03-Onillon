@@ -30,6 +30,7 @@ DataProfile.update = async function (fdata) {
   let data = await answer.json();
   return data;
 };
+
 DataProfile.readProfile = async function () {
   let answer = await fetch(
     HOST_URL + "/server/script.php?todo=readProfile"

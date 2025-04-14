@@ -4,7 +4,7 @@
   justify-content: start;
   gap: 16px;
   padding: 0 1rem;
-  max-width: 1200px;
+  max-width: 90%;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -60,14 +60,86 @@
   border-radius: 5px;
 }
 
-/* Responsive design */
+.addFavoris_button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+}
+
+.addFavoris_button:hover {
+  background-color: #333;
+  transform: scale(1.1);
+}
+
+.addFavoris_button .icon-bookmark {
+  fill: none; 
+  stroke: white;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+.addFavoris_button.is-favoris .icon-bookmark {
+  fill: #007bff; 
+  stroke: #ffffff; 
+}
+
+.addFavoris_button .icon-bookmark {
+  stroke: white;
+  transition: stroke 0.3s ease;
+}
+
+.addFavoris_button:active .icon-bookmark {
+  stroke: #fff;
+}
+
+.removeFavoris_button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #007bff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.removeFavoris_button svg {
+  stroke: #ffffff; 
+  stroke-width: 2px;
+  fill: none; 
+  transition: stroke 0.3s ease, transform 0.2s ease;
+}
+
+.removeFavoris_button:hover {
+  background-color: #0056b3; 
+  transform: scale(1.1); 
+}
+
+.removeFavoris_button:active {
+  background-color: #003f7f; 
+  transform: scale(0.95); 
+}
+
 @media (max-width: 1024px) {
   .movie-card {
     flex: 1 1 calc(33.33% - 40px);
-  }
-
-  .movie-card__image {
-    max-height: 350px;
   }
 
   .movie-card__title {
@@ -93,12 +165,10 @@
     margin: 10px 0;
   }
 
-  .movie-card__image {
-    max-height: 250px;
-  }
-
   .movie-card__title {
     font-size: 0.9rem;
     padding: 4px;
   }
 }
+
+

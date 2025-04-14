@@ -19,6 +19,7 @@
       import { Movie } from "./component/Movie/script.js";
       import { MovieDetail } from "./component/MovieDetail/script.js";
       import { MovieCategory } from "./component/MovieCategory/script.js";
+      import { Favoris } from "./component/Favoris/script.js";
 
       window.C = {};
 
@@ -48,7 +49,7 @@
 
       C.goHome = function () {
         if (C.profile) {
-          C.getMovie(C.profile.age); n
+          C.getMovie(C.profile.age);
         } else {
           document.querySelector("#content").innerHTML =
             "<p>Veuillez sélectionner un profil.</p>";
@@ -75,7 +76,6 @@
         const profileImage = document.querySelector("#profile-image");
 
         if (!select.value) {
-          // Si aucun profil n'est sélectionné, on met l'image par défaut
           profileImage.src = `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/server/images/default-avatar.png`;
           return;
         }
@@ -88,6 +88,71 @@
         }
 
         C.getMovie(C.profile.age);
+      };
+
+      C.addFavoris = async function (id_movie) {
+        if (!C.profile) {
+          alert("Veuillez sélectionner un profil avant d'ajouter un favori.");
+          return;
+        }
+        let response = await fetch(
+          `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/server/script.php?todo=addFavoris&id_profil=${C.profile.id}&id_movie=${id_movie}`
+        );
+        let result = await response.json();
+
+        if (result.success) {
+          alert("Ajouté aux favoris !");
+          let button = document.querySelector(
+            `button[onclick="C.addFavoris(${id_movie})"]`
+          );
+          if (button) {
+            button.classList.add("is-favoris");
+          }
+        } else {
+          alert(result.error || "Erreur lors de l'ajout aux favoris.");
+        }
+      };
+
+      C.removeFavoris = async function (id_movie) {
+        if (!C.profile) {
+          alert(
+            "Veuillez sélectionner un profil avant de supprimer un favori."
+          );
+          return;
+        }
+        let response = await fetch(
+          `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/server/script.php?todo=removeFavoris&id_profil=${C.profile.id}&id_movie=${id_movie}`
+        );
+
+        let result = await response.json();
+
+        if (result.success) {
+          alert("Supprimé des favoris !");
+          C.showFavoris();
+        } else {
+          alert(result.error || "Erreur lors de la suppression du favori.");
+        }
+      };
+
+      C.showFavoris = async function () {
+        if (!C.profile) {
+          alert("Veuillez sélectionner un profil.");
+          return;
+        }
+
+        let response = await fetch(
+          `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/server/script.php?todo=readFavoris&id_profil=${C.profile.id}`
+        );
+        let favoris = await response.json();
+
+        let content = document.querySelector("#content");
+        if (!favoris || favoris.length === 0) {
+          content.innerHTML = "<p>Votre liste de favoris est vide.</p>";
+          return;
+        }
+
+        // Utilise maintenant Favoris.format
+        content.innerHTML = Favoris.format(favoris);
       };
 
       window.V = {};
