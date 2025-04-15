@@ -39,7 +39,8 @@
 
       C.start = async function () {
         let profiles = await DataProfile.readProfile();
-        V.renderNavBar("C.handlerMovies()", "C.handlerProfile()", profiles);
+        let searchBar = SearchBar.format();
+        V.renderNavBar("C.handlerMovies()", "C.handlerProfile()", profiles, searchBar);
         V.renderMovieDetails();
         C.getMovie();
         C.getCategories();
@@ -166,17 +167,31 @@
 
       C.handlerSearchBar = async function (valeur) {
         if (!valeur || valeur.trim().length === 0) {
-          return C.getMovie();
+          C.getMovie(); 
+          return;
         }
         const results = await DataMovie.requestsearch(valeur);
+        if (!results || results.length === 0) {
+          document.querySelector("#content").innerHTML =
+            "<p>Aucun résultat trouvé pour votre recherche.</p>";
+          return;
+        }
+      
         V.renderMovie(results);
       };
 
       window.V = {};
 
-      V.renderNavBar = function (hHome, hProfile, image, ) {
+      V.renderNavBar = async function (hHome, hProfile, profiles, searchbarHTML) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hHome, hProfile, image);
+
+        // Utilise directement le paramètre `profiles` au lieu de le redéclarer
+        header.innerHTML = NavBar.format(
+          hHome,
+          hProfile,
+          profiles,
+          searchbarHTML
+        );
       };
 
       V.renderMovie = function (data) {

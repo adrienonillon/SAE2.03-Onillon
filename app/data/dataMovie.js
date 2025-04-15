@@ -47,8 +47,7 @@ DataMovie.requestFeaturedMovies = async function (age = 99) {
 };
 DataMovie.requestsearch = async function (valeur) {
   let answer = await fetch(
-    HOST_URL + "/server/script.php?todo=searchMovie&title=" + valeur
-  );
+    HOST_URL + "/server/script.php?todo=searchMovie&title=" + valeur);
   let movies = await answer.json();
   return movies;
 };
