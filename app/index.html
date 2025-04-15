@@ -10,7 +10,7 @@
   <body>
     <header id="header"></header>
 
-    <section id="featured-card">A l'affiche</section>
+    <section id="featured-card"></section>
     <section class="cards" id="content"></section>
 
     <script type="module">
@@ -40,8 +40,8 @@
       C.start = async function () {
         let profiles = await DataProfile.readProfile();
         let searchBar = SearchBar.format();
-        V.renderNavBar("C.handlerMovies()", "C.handlerProfile()", profiles, searchBar);
-        V.renderMovieDetails();
+        V.renderNavBar("C.goHome()", "C.handlerProfile()", profiles, searchBar);
+        C.toggleFeatured(true); // Affiche "Featured" au démarrage
         C.getMovie();
         C.getCategories();
         C.getFeaturedMovies();
@@ -50,12 +50,15 @@
       C.handlerDetail = async function (id) {
         let details = await DataMovie.requestMovieDetails(id);
         V.renderMovieDetails(details[0]);
+        C.toggleFeatured(false);
       };
 
       C.goHome = function () {
+        C.toggleFeatured(true); // Affiche "Featured"
         if (C.profile) {
-          C.getMovie(C.profile.age);
+          C.getMovie(C.profile.age); // Affiche les films pour l'âge du profil sélectionné
         } else {
+          C.getMovie(); // Affiche les films par défaut
           document.querySelector("#content").innerHTML =
             "<p>Veuillez sélectionner un profil.</p>";
         }
@@ -142,11 +145,12 @@
       };
 
       C.showFavoris = async function () {
+        
         if (!C.profile) {
           alert("Veuillez sélectionner un profil.");
           return;
         }
-
+        C.toggleFeatured(false);
         let response = await fetch(
           `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/server/script.php?todo=readFavoris&id_profil=${C.profile.id}`
         );
@@ -167,9 +171,11 @@
 
       C.handlerSearchBar = async function (valeur) {
         if (!valeur || valeur.trim().length === 0) {
-          C.getMovie(); 
+          C.getMovie(); // Affiche les films par défaut si la barre de recherche est vide
+          C.hideFeaturedOnSearch(valeur); // Réaffiche "Featured" si la barre est vide
           return;
         }
+      
         const results = await DataMovie.requestsearch(valeur);
         if (!results || results.length === 0) {
           document.querySelector("#content").innerHTML =
@@ -177,7 +183,27 @@
           return;
         }
       
-        V.renderMovie(results);
+        V.renderMovie(results); // Affiche les résultats de la recherche
+      };
+
+      C.toggleFeatured = function (show) {
+        let featuredSection = document.querySelector("#featured-card");
+        if (show) {
+          featuredSection.classList.remove("hidden");
+        } else {
+          featuredSection.classList.add("hidden");
+        }
+      };
+
+      C.hideFeaturedOnSearch = function (value) {
+        let featuredSection = document.querySelector("#featured-card");
+        if (value && value.trim().length > 0) {
+          // Masque la section "Featured" si du texte est saisi
+          featuredSection.classList.add("hidden");
+        } else {
+          // Réaffiche la section "Featured" si la barre de recherche est vide
+          featuredSection.classList.remove("hidden");
+        }
       };
 
       window.V = {};

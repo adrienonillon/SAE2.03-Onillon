@@ -3,9 +3,10 @@
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  align-items: center;
   margin: 0 auto;
   padding: 20px;
-  max-width: 1200px;
+  max-width: 85%;
 }
 
 .featured-card__title {
@@ -76,4 +77,8 @@
 .featured-description {
   font-size: 16px;
   margin: 0;
+}
+
+.hidden {
+  display: none !important;
 }
