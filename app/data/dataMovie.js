@@ -38,5 +38,20 @@ DataMovie.removeFavoris = async function (id_profil, id_movie) {
   let data = await answer.json();
   return data;
 };
+DataMovie.requestFeaturedMovies = async function (age = 99) {
+  let answer = await fetch(
+    HOST_URL + `/server/script.php?todo=getFeaturedMovies&age=${age}`
+  );
+  let featuredMovies = await answer.json();
+  return featuredMovies;
+};
+DataMovie.requestsearch = async function (valeur) {
+  let answer = await fetch(
+    HOST_URL + "/server/script.php?todo=searchMovie&title=" + valeur
+  );
+  let movies = await answer.json();
+  return movies;
+};
+
 
 export {DataMovie};

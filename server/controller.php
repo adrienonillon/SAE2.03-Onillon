@@ -132,3 +132,17 @@ function removeFavorisController() {
       return ["error" => "Impossible de supprimer le film des favoris."];
   }
 }
+
+function getFeaturedMoviesController() {
+    $age = isset($_REQUEST['age']) ? intval($_REQUEST['age']) : 99; 
+    $featuredMovies = getFeaturedMovies($age); 
+    return $featuredMovies ? $featuredMovies : [];
+}
+
+function readSearchMovieController()
+{
+  $title = $_REQUEST['title'] ?? null;
+  if (empty($title))
+    return false;
+  return searchMovietitle($title);
+}

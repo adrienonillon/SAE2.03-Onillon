@@ -18,9 +18,17 @@ if ( isset($_REQUEST['todo']) ){
 
   switch($todo){
 
+    case 'searchMovie':
+      $data = readSearchMovieController();
+    break;
+
+    case 'getFeaturedMovies':
+      $data = getFeaturedMoviesController();
+    break;
+
     case 'removeFavoris':
       $data = removeFavorisController();
-      break;
+    break;
       
     case 'addFavoris': 
       $data = addFavorisController();

@@ -10,6 +10,7 @@
   <body>
     <header id="header"></header>
 
+    <section id="featured-card">A l'affiche</section>
     <section class="cards" id="content"></section>
 
     <script type="module">
@@ -20,6 +21,8 @@
       import { MovieDetail } from "./component/MovieDetail/script.js";
       import { MovieCategory } from "./component/MovieCategory/script.js";
       import { Favoris } from "./component/Favoris/script.js";
+      import { Featured } from "./component/Featured/script.js";
+      import { SearchBar } from "./component/SearchBar/script.js";
 
       window.C = {};
 
@@ -40,6 +43,7 @@
         V.renderMovieDetails();
         C.getMovie();
         C.getCategories();
+        C.getFeaturedMovies();
       };
 
       C.handlerDetail = async function (id) {
@@ -86,6 +90,8 @@
         if (C.profile && C.profile.image) {
           profileImage.src = `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/server/images/${C.profile.image}`;
         }
+
+      
 
         C.getMovie(C.profile.age);
       };
@@ -150,22 +156,33 @@
           content.innerHTML = "<p>Votre liste de favoris est vide.</p>";
           return;
         }
-
-        // Utilise maintenant Favoris.format
         content.innerHTML = Favoris.format(favoris);
+      };
+
+      C.getFeaturedMovies = async function () {
+        let featuredMovies = await DataMovie.requestFeaturedMovies();
+        V.renderFeaturedMovies(featuredMovies);
+      };
+
+      C.handlerSearchBar = async function (valeur) {
+        if (!valeur || valeur.trim().length === 0) {
+          return C.getMovie();
+        }
+        const results = await DataMovie.requestsearch(valeur);
+        V.renderMovie(results);
       };
 
       window.V = {};
 
-      V.renderNavBar = function (hHome, hProfile, image) {
+      V.renderNavBar = function (hHome, hProfile, image, ) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(hHome, hProfile, image);
       };
 
-      // V.renderMovie = function (data) {
-      //   let content = document.querySelector("#content");
-      //   content.innerHTML = Movie.format(data);
-      // };
+      V.renderMovie = function (data) {
+        let content = document.querySelector("#content");
+        content.innerHTML = Movie.format(data);
+      };
 
       V.renderMovieDetails = function (data) {
         if (!data) return;
@@ -180,6 +197,11 @@
           formattedContent += MovieCategory.format(category);
         }
         content.innerHTML = formattedContent;
+      };
+
+      V.renderFeaturedMovies = function (movies) {
+        let featuredSection = document.querySelector("#featured-card");
+        featuredSection.innerHTML = Featured.format(movies);
       };
 
       C.start();

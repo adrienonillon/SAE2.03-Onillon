@@ -224,3 +224,30 @@ function removeFavoris($id_movie, $id_profil) {
     $stmt->execute();
     return $stmt->rowCount() > 0;
 }
+
+
+function getFeaturedMovies($age) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT id, name, image, description 
+            FROM Movie 
+            WHERE featured = TRUE AND min_age <= :age";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':age', $age, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
+function searchMovietitle($title)
+{
+    $cnx = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, DBLOGIN, DBPWD);
+    $sql = 'SELECT Movie.id, Movie.name, Movie.image, Movie.year, Movie.min_age, Movie.description, Movie.featured, Category.name AS category_name
+            FROM Movie
+            INNER JOIN Category ON Movie.id_category = Category.id
+            WHERE Movie.name LIKE :title OR Category.name LIKE :title OR year LIKE :title';
+
+    $stmt = $cnx->prepare($sql);
+    $liketitle = '%' . $title . '%';
+    $stmt->bindParam(':title', $liketitle);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
