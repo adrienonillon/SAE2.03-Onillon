@@ -1,0 +1,17 @@
+
+<div class="movie-card" onclick="{{handler}}">
+  <img class="movie-card_img" src="https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203-iteration-surprise/server/images/{{image}}"
+      alt="img film">
+  <h1 class="movie-card_title">{{title}}</h1>
+
+
+  <button class="{{buttonClass}}" onclick="event.stopPropagation(); {{buttonAction}}" aria-label="{{buttonLabel}}">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-bookmark">
+      <path d="{{iconPath}}" />
+    </svg>
+  </button>
+</div>
+
+
+
+

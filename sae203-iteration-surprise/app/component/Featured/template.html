@@ -1,0 +1,13 @@
+<div class="featured-section">
+  <h2 class="featured-section__title">Nos Recommandations</h2>
+
+  <div class="carousel-container">
+    <button class="carousel-button carousel-button--left" onclick="C.scrollLeft('{{carouselId}}')">&#8249;</button>
+    
+    <div class="carousel-track" id="{{carouselId}}">
+      {{movieCard}}
+    </div>
+    
+    <button class="carousel-button carousel-button--right" onclick="C.scrollRight('{{carouselId}}')">&#8250;</button>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<section class="movie-card" onclick="{{handler}}">
+  <div class="movie-card__container">
+    <p class="movie-card__title">{{title}}</p>
+    <img class="movie-card__image" src="https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203/server/images/{{image}}" alt="Affiche" />
+  </div>
+  <button class="{{buttonClass}}" onclick="event.stopPropagation(); {{buttonAction}}" aria-label="{{buttonLabel}}">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-bookmark">
+      <path d="{{iconPath}}" />
+    </svg>
+  </button>
+</section>
+

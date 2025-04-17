@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>SAE2.03 ADMIN</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/base.css" />
+  </head>
+  <body>
+    <section id="log"></section>
+    <div class="admin__container">
+
+      <section id="content"></section>
+
+
+      <div class="profile-container">
+        <section id="addProfile"></section>
+        <section id="updateProfile"></section>
+      </div>
+    </div>
+
+    <script type="module">
+      import { Log } from "./component/Log/script.js";
+      import { MovieForm } from "./component/MovieForm/script.js";
+      import { DataMovie } from "./data/dataMovie.js";
+      import { DataProfile } from "./data/dataProfile.js";
+      import { ProfileForm } from "./component/ProfileForm/script.js";
+      import { updateProfileForm } from "./component/UpdateProfilForm/script.js";
+
+      window.C = {};
+
+      C.handlerAddMovie = async function () {
+        let form = document.querySelector(".addMovie__form");
+        let fd = new FormData(form);
+
+        let isEmpty = false;
+        form.querySelectorAll("input").forEach((input) => {
+          if (!input.value.trim()) {
+            isEmpty = true;
+          }
+        });
+
+        if (isEmpty) {
+          V.renderLog(
+            "Erreur lors de l'ajout du film : tous les champs doivent être remplis."
+          );
+          return;
+        }
+
+        let res = await DataMovie.addMovie(fd);
+
+        if (res.success) {
+          form.reset(); 
+          location.reload();
+          V.renderLog("Le film a été ajouté avec succès.");
+        } else {
+          V.renderLog(
+            "Erreur lors de l'ajout du film : tous les champs doivent être remplis."
+          );
+        }
+      };
+
+      C.handlerAddProfile = async function () {
+        let form = document.querySelector(".addProfile__form");
+        let fd = new FormData(form);
+        let res = await DataProfile.addProfile(fd);
+
+        if (res.includes("succès")) { 
+          form.reset();
+          location.reload(); 
+        }
+
+        V.renderLog(res);
+      };
+
+      C.handlerUpdateProfile = async function () {
+        let form = document.querySelector(".updateProfile__form");
+        let fd = new FormData(form);
+        let res = await DataProfile.update(fd);
+
+        if (res.includes("succès")) { 
+          form.reset(); 
+          location.reload();
+        }
+
+        V.renderLog(res);
+      };
+
+      C.loadProfiles = async function() {
+        let profiles = await DataProfile.readProfile();
+        let optionsHtml = "";
+        for (let i = 0; i < profiles.length; i++) {
+          let profile = profiles[i];
+          optionsHtml += `<option value="${profile.id}">${profile.name}</option>`;
+        }
+        let select = document.querySelector('#profile-select');
+        if (select) {
+          select.innerHTML = optionsHtml;
+        }
+      };
+
+      C.start = function () {
+        V.renderLog("Démarrage de l'application");
+        V.renderForm("C.handlerAddMovie()");
+        V.renderAddProfile("C.handlerAddProfile()");
+        V.renderUpdateProfileForm("C.handlerUpdateProfile()");
+        C.loadProfiles();
+      };
+
+      window.V = {};
+
+      V.renderLog = function (txt) {
+        let content = document.querySelector("#log");
+        content.innerHTML = Log.format(txt);
+      };
+
+      V.renderForm = function (handler) {
+        let content = document.querySelector("#content");
+        content.innerHTML = MovieForm.format(handler);
+      };
+
+      V.renderAddProfile = function (handler) {
+        let content = document.querySelector("#addProfile");
+        content.innerHTML = ProfileForm.format(handler);
+      };
+
+      V.renderUpdateProfileForm = function(handler) {
+      let content = document.querySelector("#updateProfile");
+      content.innerHTML = updateProfileForm.format(handler);  
+      };
+      C.start();
+    </script>
+  </body>
+</html>

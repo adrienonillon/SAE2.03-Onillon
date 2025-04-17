@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>SAE2.03 APP</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/base.css" />
+  </head>
+
+  <body>
+    <header id="header"></header>
+
+    <section id="featured-card"></section>
+    <section class="cards" id="content"></section>
+
+    <script type="module">
+      import { NavBar } from "./component/NavBar/script.js";
+      import { DataMovie } from "./data/dataMovie.js";
+      import { DataProfile } from "./data/dataProfile.js";
+      import { Movie } from "./component/Movie/script.js";
+      import { MovieDetail } from "./component/MovieDetail/script.js";
+      import { MovieCategory } from "./component/MovieCategory/script.js";
+      import { Favoris } from "./component/Favoris/script.js";
+      import { Featured } from "./component/Featured/script.js";
+      import { SearchBar } from "./component/SearchBar/script.js";
+
+      window.C = {};
+
+      C.profile = null;
+      C.getMovie = async function (age) {
+        let data = await DataMovie.requestMovies(age);
+        if (!Array.isArray(data) || data.length === 0) {
+          document.querySelector("#content").innerHTML =
+            "<p>Aucun film disponible pour votre tranche d'âge.</p>";
+          return;
+        }
+        V.renderMovieCategory(data);
+      };
+
+      C.start = async function () {
+        let profiles = await DataProfile.readProfile();
+        let searchBar = SearchBar.format();
+        V.renderNavBar("C.goHome()", "C.handlerProfile()", profiles, searchBar);
+        C.toggleFeatured(true); 
+        C.getMovie();
+        C.getCategories();
+        C.getFeaturedMovies();
+      };
+
+      C.handlerDetail = async function (id) {
+        let details = await DataMovie.requestMovieDetails(id);
+        V.renderMovieDetails(details[0]);
+        C.toggleFeatured(false);
+      };
+
+      C.goHome = function () {
+        C.toggleFeatured(true); 
+        if (C.profile) {
+          C.getMovie(C.profile.age); 
+        } else {
+          C.getMovie(); 
+          document.querySelector("#content").innerHTML =
+            "<p>Veuillez sélectionner un profil.</p>";
+        }
+      };
+
+      C.getCategories = async function () {
+        if (!C.profile) {
+          document.querySelector("#content").innerHTML =
+            "<p>Veuillez sélectionner un profil.</p>";
+          return;
+        }
+        let categories = await DataMovie.requestMovies(99);
+        if (!Array.isArray(categories) || categories.length === 0) {
+          document.querySelector("#content").innerHTML =
+            "<p>Aucune catégorie disponible pour votre tranche d'âge.</p>";
+          return;
+        }
+        V.renderMovieCategory(categories);
+      };
+
+      C.handlerProfile = async function () {
+        const select = document.querySelector("#profile-select");
+        const profileImage = document.querySelector("#profile-image");
+
+        if (!select.value) {
+          profileImage.src = `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203/server/images/default-avatar.png`;
+          return;
+        }
+
+        let dataProfile = await DataProfile.readOne(select.value);
+        C.profile = dataProfile[0];
+
+        if (C.profile && C.profile.image) {
+          profileImage.src = `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203/server/images/${C.profile.image}`;
+        }
+
+      
+
+        C.getMovie(C.profile.age);
+      };
+
+      C.addFavoris = async function (id_movie) {
+        if (!C.profile) {
+          alert("Veuillez sélectionner un profil avant d'ajouter un favori.");
+          return;
+        }
+        let response = await fetch(
+          `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203/server/script.php?todo=addFavoris&id_profil=${C.profile.id}&id_movie=${id_movie}`
+        );
+        let result = await response.json();
+
+        if (result.success) {
+          alert("Ajouté aux favoris !");
+          let button = document.querySelector(
+            `button[onclick="C.addFavoris(${id_movie})"]`
+          );
+          if (button) {
+            button.classList.add("is-favoris");
+          }
+        } else {
+          alert(result.error || "Erreur lors de l'ajout aux favoris.");
+        }
+      };
+
+      C.removeFavoris = async function (id_movie) {
+        if (!C.profile) {
+          alert(
+            "Veuillez sélectionner un profil avant de supprimer un favori."
+          );
+          return;
+        }
+        let response = await fetch(
+          `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203/server/script.php?todo=removeFavoris&id_profil=${C.profile.id}&id_movie=${id_movie}`
+        );
+
+        let result = await response.json();
+
+        if (result.success) {
+          alert("Supprimé des favoris !");
+          C.showFavoris();
+        } else {
+          alert(result.error || "Erreur lors de la suppression du favori.");
+        }
+      };
+
+      C.showFavoris = async function () {
+        
+        if (!C.profile) {
+          alert("Veuillez sélectionner un profil.");
+          return;
+        }
+        C.toggleFeatured(false);
+        let response = await fetch(
+          `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203/server/script.php?todo=readFavoris&id_profil=${C.profile.id}`
+        );
+        let favoris = await response.json();
+
+        let content = document.querySelector("#content");
+        if (!favoris || favoris.length === 0) {
+          content.innerHTML = "<p>Votre liste de favoris est vide.</p>";
+          return;
+        }
+        content.innerHTML = Favoris.format(favoris);
+      };
+
+      C.getFeaturedMovies = async function () {
+        let featuredMovies = await DataMovie.requestFeaturedMovies();
+        V.renderFeaturedMovies(featuredMovies);
+      };
+
+      C.handlerSearchBar = async function (valeur) {
+        if (!valeur || valeur.trim().length === 0) {
+          C.getMovie(); 
+          C.hideFeaturedOnSearch(valeur);
+          return;
+        }
+      
+        const results = await DataMovie.requestsearch(valeur);
+        if (!results || results.length === 0) {
+          document.querySelector("#content").innerHTML =
+            "<p>Aucun résultat trouvé pour votre recherche.</p>";
+          return;
+        }
+      
+        V.renderMovie(results); 
+      };
+
+      C.toggleFeatured = function (show) {
+        let featuredSection = document.querySelector("#featured-card");
+        if (show) {
+          featuredSection.classList.remove("hidden");
+        } else {
+          featuredSection.classList.add("hidden");
+        }
+      };
+
+      C.hideFeaturedOnSearch = function (value) {
+        let featuredSection = document.querySelector("#featured-card");
+        if (value && value.trim().length > 0) {
+          
+          featuredSection.classList.add("hidden");
+        } else {
+          
+          featuredSection.classList.remove("hidden");
+        }
+      };
+
+      window.V = {};
+
+      V.renderNavBar = async function (hHome, hProfile, profiles, searchbarHTML) {
+        let header = document.querySelector("#header");
+
+       
+        header.innerHTML = NavBar.format(
+          hHome,
+          hProfile,
+          profiles,
+          searchbarHTML
+        );
+      };
+
+      V.renderMovie = function (data) {
+        let content = document.querySelector("#content");
+        content.innerHTML = Movie.format(data);
+      };
+
+      V.renderMovieDetails = function (data) {
+        if (!data) return;
+        let content = document.querySelector("#content");
+        content.innerHTML = MovieDetail.format(data);
+      };
+
+      V.renderMovieCategory = function (data) {
+        let content = document.querySelector("#content");
+        let formattedContent = "";
+        for (let category of data) {
+          formattedContent += MovieCategory.format(category);
+        }
+        content.innerHTML = formattedContent;
+      };
+
+      V.renderFeaturedMovies = function (movies) {
+        let featuredSection = document.querySelector("#featured-card");
+        featuredSection.innerHTML = Featured.format(movies);
+      };
+
+      C.start();
+    </script>
+  </body>
+</html>
+<script type="module"></script>

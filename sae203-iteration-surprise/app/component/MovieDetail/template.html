@@ -1,0 +1,27 @@
+<div class="movie__container-detail">
+  <div class="movie__detail">
+    <div class="movie__top">
+      <div class="movie__poster">
+        <img src="https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203-iteration-surprise/server/images/{{image}}" alt="image du film" />
+      </div>
+      <div class="movie__info">
+        <div class="movie__header">
+          <h2 class="movie__title">{{titre}}</h2>
+          <button class="favoris-btn" onclick="C.addFavoris('{{id}}')">
+
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
+              <path d="M6 2C5.44772 2 5 2.44772 5 3V21.382C5 21.8471 5.53857 22.0806 5.89443 21.7764L12 16.382L18.1056 21.7764C18.4614 22.0806 19 21.8471 19 21.382V3C19 2.44772 18.5523 2 18 2H6Z" />
+            </svg>
+          </button>
+        </div>
+        <p class="movie__description">{{desc}}</p>
+        <p><strong>Réalisateur:</strong> {{director}}</p>
+        <p><strong>Année:</strong> {{year}}</p>
+        <p><strong>Durée:</strong> {{length}} min</p>
+        <p><strong>Catégorie:</strong> {{id_category}}</p>
+        <p><strong>Âge Minimum:</strong> {{min_age}} ans</p>
+      </div>
+    </div>
+    <iframe src="{{trailer}}" title="Bande-annonce" allowfullscreen></iframe>
+  </div>
+</div>
