@@ -1,11 +1,13 @@
+/* Barre de recherche (mobile-first) */
 .searchbar {
-  position: relative;
-
-  align-items: center;
-  width: 100%;
-  max-width: 31.25rem;
-  margin: 0 auto;
+  position: relative; /* Relative pour s'intégrer dans la barre de navigation */
+  display: flex;
+  flex-direction: row; /* Les éléments restent alignés horizontalement */
+  align-items: center; /* Centre verticalement les éléments */
+  justify-content: flex-end; /* Aligne les éléments à droite */
+  max-width: 100%; /* La barre de recherche occupe toute la largeur si nécessaire */
   transition: all 0.3s ease;
+  margin-left: auto; /* Pousse la barre de recherche à droite */
 }
 
 .searchbar.active {
@@ -13,7 +15,9 @@
 }
 
 .searchbar__input {
+  display: block;
   width: 100%;
+  max-width: 15rem; /* Limite la largeur de l'input */
   padding: 0.75rem 1rem;
   font-size: 1rem;
   font-family: var(--ff-sans);
@@ -58,6 +62,24 @@
   width: 1.5rem;
   height: 1.5rem;
   fill: var(--color-white);
+}
+
+/* Desktop (768px et plus) */
+@media (min-width: 768px) {
+  .searchbar {
+    position: relative; /* Position relative pour recentrer */
+    top: 0;
+    right: 0;
+    left: 50%; /* Centre horizontalement */
+    transform: translateX(-50%); /* Ajuste pour un centrage parfait */
+    justify-content: center; /* Centre horizontalement les éléments */
+    max-width: 31.25rem; /* Largeur maximale sur desktop */
+    margin: 0 auto; /* Centre la barre de recherche */
+  }
+
+  .searchbar__input {
+    max-width: 100%; /* La largeur s'adapte au conteneur */
+  }
 }
 
 @media (max-width: 48rem) {
