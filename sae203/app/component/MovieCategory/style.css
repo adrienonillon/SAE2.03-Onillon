@@ -1,4 +1,4 @@
-/* === CATEGORY CONTAINER === */
+
 .movie-category {
   width: 100%;
   border-radius: 16px;
@@ -6,7 +6,7 @@
   padding: 10px;
 }
 
-/* === CATEGORY TITLE === */
+
 .movie-category__title {
   padding-left: 10px;
   margin-bottom: 25px;
@@ -17,7 +17,7 @@
   border-left: 4px solid #007bff;
 }
 
-/* === CATEGORY ITEM (optionnel) === */
+
 .movie-category__item {
   display: flex;
   align-items: center;
@@ -25,7 +25,7 @@
   color: #ffffff;
 }
 
-/* === RESPONSIVE TITLES === */
+
 @media (max-width: 768px) {
   .movie-category__title {
     font-size: 1.8rem;

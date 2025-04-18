@@ -1,10 +1,12 @@
 .searchbar {
   position: relative;
   display: flex;
+  flex-direction: row; 
   align-items: center;
+  justify-content: center;
   width: 100%;
-  max-width: 31.25rem;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0 1rem; 
   transition: all 0.3s ease;
 }
 
@@ -56,29 +58,6 @@
   fill: var(--color-white);
 }
 
-@media (max-width: 48rem) {
-  .searchbar {
-    flex-direction: row; /* Les éléments restent alignés horizontalement */
-    align-items: center; /* Centre verticalement les éléments */
-    justify-content: center; /* Centre horizontalement la barre de recherche */
-    max-width: 100%; /* La barre de recherche occupe toute la largeur */
-    margin-left: 1rem; /* Ajoute un espacement à gauche */
-    margin-right: 1rem; /* Ajoute un espacement à droite */
-  }
-
-  .searchbar__input {
-    display: block; /* Toujours visible même en format téléphone */
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    border-radius: 2rem;
-    background-color: black; /* Conserve le fond noir */
-    animation: none; /* Supprime l'animation pour un affichage direct */
-  }
-}
-
 .hidden {
   display: none !important;
 }
@@ -91,5 +70,13 @@
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+
+@media (min-width: 48rem) {
+  .searchbar {
+    max-width: 31.25rem; 
+    margin: 0 auto; 
   }
 }

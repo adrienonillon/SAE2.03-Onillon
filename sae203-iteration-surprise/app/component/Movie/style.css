@@ -1,4 +1,14 @@
-/* === BASE STYLES === */
+#content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 30rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -8,28 +18,32 @@
   box-sizing: border-box;
 }
 
+
 .movie-card {
   position: relative;
-  width: 100%;
-  max-width: 100%;
+  flex: 1 1 calc(25% - 40px);
+  max-width: 300px;
   height: auto;
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  border-radius: 0.5rem;
   background-color: #1a1a1a;
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
 }
+
+
 
 .movie-card_img {
   width: 100%;
-  height: 250px;
+  height: 15.625rem; /* 250px */
   object-fit: cover;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
   transition: filter 0.3s ease;
 }
 
@@ -45,18 +59,18 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #1a1a1a;
+  background-color: var(--color-bg);
   color: white;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 2.5rem; 
+  height: 2.5rem; 
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
   z-index: 3;
 }
 
@@ -71,67 +85,129 @@
   transition: fill 0.3s ease, stroke 0.3s ease;
 }
 
+.removeFavoris_button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--color-bg);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-/* === MEDIA QUERIES === */
+.removeFavoris_button svg {
+  stroke: var(--color-txt-white); 
+  stroke-width: 2px;
+  fill: none; 
+  transition: stroke 0.3s ease, transform 0.2s ease;
+}
 
-/* Tablettes et écrans moyens (min-width: 480px) */
-@media (min-width: 480px) {
+.removeFavoris_button:hover {
+  background-color:var(--color-bg); 
+  transform: scale(1.1); 
+}
+
+.removeFavoris_button:active {
+  background-color: #003f7f; 
+  transform: scale(0.95); 
+}
+
+@media (min-width: 30rem) {
   .movie-card {
     flex: 1 1 calc(50% - 1rem);
     max-width: calc(50% - 1rem);
   }
-
+  
   .movie-card_img {
-    height: 250px;
+    height: 15.6rem; 
   }
-
+  
   .movie-card_title {
     font-size: 1.1rem;
   }
 }
 
-/* Tablettes larges (min-width: 768px) */
-@media (min-width: 768px) {
+@media (min-width: 48rem) { 
   .movie-card {
     flex: 1 1 calc(33.33% - 1rem);
     max-width: calc(33.33% - 1rem);
   }
-
+  
   .movie-card_img {
-    height: 300px;
+    height: 18.75rem; 
   }
-
+  
   .movie-card_title {
     font-size: 1.2rem;
   }
-
+  
   .addFavoris_button {
     top: 15px;
     right: 15px;
-    width: 50px;
-    height: 50px;
+    width: 3rem; 
+    height: 3rem; 
   }
 }
 
-/* Écrans larges (min-width: 1024px) */
-@media (min-width: 1024px) {
+@media (min-width: 64rem) { 
+  #content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 30rem;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+
   .movie-card {
-    flex: 1 1 calc(25% - 1rem);
-    max-width: calc(25% - 1rem);
+    width: 5remrem;
+    height: 15rem;
   }
-
+  
   .movie-card_img {
-    height: 350px;
+    height: 21.8rem; 
   }
-
+  
   .movie-card_title {
     font-size: 1.3rem;
   }
-
+  
   .addFavoris_button {
     top: 20px;
     right: 20px;
-    width: 60px;
-    height: 60px;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

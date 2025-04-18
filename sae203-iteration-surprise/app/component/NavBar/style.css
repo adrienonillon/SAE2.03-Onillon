@@ -1,121 +1,158 @@
-/* === BASE STYLES === */
 .navbar {
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   padding: 0.5rem 1rem;
-  background-color: var(--color-black);
-  border-bottom: 1px solid var(--color-gray-dark);
-  font-family: var(--ff);
-  position: relative;
+  box-sizing: border-box;
+  border-bottom: solid 1px var(--color-bg);
 }
 
-/* Logo du site */
-.navbar__logo {
+.navbar__brand {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: var(--color-white);
-  text-transform: uppercase;
   cursor: pointer;
+  margin-right: 2rem;  
+  padding-left: 0rem;
 }
 
-/* Bouton des favoris */
+.navbar__logo {
+
+  width: 2rem; 
+  height: 2rem;
+  object-fit: cover;
+}
+
+.navbar__name {
+  display: none;
+}
+
+.navbar__list {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  gap: 1rem;
+}
+
+.navbar__item {
+  margin: 0;
+  font-size: 1rem;
+  list-style: none;
+  text-decoration: underline;
+  text-decoration-thickness: 0.1rem;
+  text-underline-offset: 0.2rem;
+  cursor: pointer;
+  transition: text-underline-offset 0.2s ease-in-out;
+}
+
+.navbar__select {
+  padding: 0.5rem;
+  border: 1px solid var(--color-bg);
+  border-radius: 0.25rem;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  cursor: pointer;
+  font-size: 1rem;
+  width: auto;
+}
+
+.navbar__image {
+  display: none; 
+}
+
+.navbar__profil {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 0;
+}
+
 .navbar__favoris {
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.navbar__favoris svg {
-  width: 2rem;
-  height: 2rem;
-  fill: var(--color-white);
-  transition: fill 0.3s ease;
+.navbar__favoris:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
 }
 
-.navbar__favoris:hover svg {
-  fill: var(--color-blue);
+.navbar__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: white;
+  transition: stroke 0.3s ease;
 }
 
-
-.navbar__list {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  flex-grow: 1; /* Permet de prendre l'espace disponible */
-  justify-content: center;
-}
-
-
-.navbar__search {
-  display: flex;
-  align-items: center;
-  margin-left: 1rem;
-}
-
-/* Sélecteur de profil */
-#profile-select {
-  width: 6.5rem;
-  background-color: var(--color-black);
-  color: var(--color-white);
-  border: 1px solid var(--color-gray-dark);
-  border-radius: 0.25rem;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
-}
-
-/* === MOBILE FIRST STYLES === */
-.navbar {
-  flex-wrap: nowrap;
-}
-
-.navbar__image {
-  display: none;
-}
-
-/* === MEDIA QUERIES === */
-
-/* Tablettes et écrans moyens (min-width: 768px) */
 @media (min-width: 768px) {
-  .navbar__logo {
-    font-size: 1.5rem;
-  }
-
-  .navbar__list {
-    margin: 0 auto; /* Centre la barre de navigation */
-  }
-
-  .navbar__search {
-    margin: 0 auto; /* Position équilibrée */
-  }
-}
-
-/* Écrans larges (min-width: 1024px) */
-@media (min-width: 1024px) {
   .navbar {
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
   }
+
 
   .navbar__logo {
-    font-size: 2rem;
-  }
-
-  .navbar__list {
-    gap: 2rem; /* Plus d'espacement pour les grands écrans */
-  }
-
-  .navbar__favoris svg {
-    width: 2.5rem;
+    width: 2.5rem; 
     height: 2.5rem;
   }
 
-  #profile-select {
-    font-size: 1rem;
+  .navbar__name {
+    display: block;
+    font-size: 1.75rem;
+  }
+
+  .navbar__list {
+    margin-left: 5rem;
+    gap: 2rem;
+  }
+
+  .navbar__item {
+    font-size: 1.35rem;
+  }
+
+  .navbar__profil {
+    margin-right: 2.5rem;
+  }
+
+  .navbar__image {
+    display: flex; 
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 0.5rem;
+  }
+
+  .navbar__select {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar__list {
+    gap: 3rem;
+  }
+
+  .navbar__item {
+    font-size: 1.5rem;
+  }
+
+  .navbar__logo {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .navbar__name {
+    display: block;
+    font-size: 1.5rem;
   }
 }

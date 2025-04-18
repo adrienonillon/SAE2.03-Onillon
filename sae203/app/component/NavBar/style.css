@@ -1,37 +1,36 @@
 .navbar {
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: space-between;
-  padding: 1rem 1.5rem;
+  align-items: center;
+  padding: 0.5rem 1rem;
   box-sizing: border-box;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   border-bottom: solid 1px var(--color-bg);
 }
 
 .navbar__list {
   display: flex;
-  align-items: center;
   margin: 0;
   padding: 0;
   list-style: none;
-  margin-left: 5rem;
+  justify-content: flex-start;
+  gap: 1rem;
 }
 
 .navbar__item {
-  justify-content: space-around;
-  --_offset: 0.2rem;
+  margin: 0;
+  font-size: 1rem;
   list-style: none;
   text-decoration: underline;
   text-decoration-thickness: 0.1rem;
-  text-underline-offset: var(--_offset);
+  text-underline-offset: 0.2rem;
   cursor: pointer;
   transition: text-underline-offset 0.2s ease-in-out;
-  margin: 0 2rem; 
-  font-size: 1.35rem; 
 }
 
 .navbar__item:hover {
-  --_offset: 0.5rem;
+  text-underline-offset: 0.5rem;
   color: #007bff;
 }
 
@@ -42,22 +41,23 @@
   background-color: var(--color-bg);
   color: var(--color-fg);
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  width: auto;
 }
 
 .navbar__image {
-  width: 2.5rem; 
-  height: 2.5rem; 
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
   object-fit: cover;
-  margin-left: 0.5rem; 
+  margin-left: 0.5rem;
 }
 
 .navbar__profil {
   display: flex;
   align-items: center;
-  
-  margin-right: 2.5rem;
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .favoris-card {
@@ -102,43 +102,44 @@
   transform: scale(1.1);
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .navbar {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1.5rem;
   }
 
   .navbar__list {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    justify-content: flex-start;
-    gap: 1rem;
+    margin-left: 5rem;
+    gap: 2rem;
   }
 
   .navbar__item {
-    margin: 0;
-    font-size: 1rem;
+    font-size: 1.35rem;
   }
 
   .navbar__profil {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    margin-right: 0;
+    margin-right: 2.5rem;
   }
 
   .navbar__image {
-    width: 2rem;
-    height: 2rem;
-    margin-left: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
   .navbar__select {
-    font-size: 1rem;
-    width: auto;
+    font-size: 1.1rem;
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .navbar__list {
+    gap: 3rem;
+  }
+
+  .navbar__item {
+    font-size: 1.5rem;
   }
 }

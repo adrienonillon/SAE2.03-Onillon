@@ -2,13 +2,13 @@
   <div class="movie__detail">
     <div class="movie__top">
       <div class="movie__poster">
-        <img src="https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203-iteration-surprise/server/images/{{image}}" alt="image du film" />
+        <img src="../../server/images/{{image}}" loading="lazy" alt="image du film" />
       </div>
       <div class="movie__info">
         <div class="movie__header">
           <h2 class="movie__title">{{titre}}</h2>
           <button class="movie__favoris-btn" onclick="C.addFavoris('{{id}}')" aria-label="Ajouter aux favoris">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-bookmark">
+            <svg xmlns="http://www.w3.org/2000/svg" loading="lazy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-bookmark">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
             </svg>
           </button>
@@ -21,6 +21,6 @@
         <p><strong>Âge Minimum:</strong> {{min_age}} ans</p>
       </div>
     </div>
-    <iframe src="{{trailer}}" title="Bande-annonce" allowfullscreen></iframe>
+    <iframe class="movie__iframe" src="{{trailer}}" title="Bande-annonce" allowfullscreen></iframe>
   </div>
 </div>

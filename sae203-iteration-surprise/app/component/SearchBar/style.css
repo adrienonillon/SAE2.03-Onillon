@@ -1,33 +1,27 @@
-/* === BASE STYLES === */
 .searchbar {
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: row; 
   align-items: center;
-  justify-content: flex-end;
-  max-width: 100%;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%; 
+  margin: 0 1rem; 
   transition: all 0.3s ease;
-  margin-left: auto;
-}
-
-.searchbar.active {
-  display: flex;
 }
 
 .searchbar__input {
-  display: block;
   width: 100%;
-  max-width: 5rem;
   padding: 0.75rem 1rem;
   font-size: 1rem;
-  font-family: var(--ff-sans);
+  font-family: var(--ff);
   color: var(--color-white);
-  background-color: black;
-  border: 0.0625rem solid rgba(0, 123, 255, 0.3);
+  background-color: var(--color-bg);
+  border: transparent;
   border-radius: 2rem;
   outline: none;
   transition: all 0.3s ease;
-  box-shadow: inset 0 0 0 0 rgba(0, 123, 255, 0.3);
+
   text-align: left;
   line-height: normal;
 }
@@ -38,12 +32,7 @@
   transition: opacity 0.3s ease;
 }
 
-.searchbar__input:focus {
-  background-color: rgba(0, 123, 255, 0.3);
-  border-color: var(--color-blue);
-  box-shadow: 0 0 1rem rgba(0, 123, 255, 0.3),
-    inset 0 0 0.3125rem rgba(0, 123, 255, 0.1);
-}
+
 
 .searchbar__input:focus::placeholder {
   opacity: 0.5;
@@ -68,58 +57,9 @@
   display: none !important;
 }
 
-/* === MEDIA QUERIES === */
-
-/* Tablettes et écrans moyens (min-width: 768px) */
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .searchbar {
-    position: relative;
-    top: 0;
-    right: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    justify-content: center;
-    max-width: 31.25rem;
-    margin: 0 auto;
-  }
-
-  .searchbar__input {
-    max-width: 100%;
-  }
-}
-
-/* Petits écrans larges (max-width: 48rem) */
-@media (max-width: 48rem) {
-  .searchbar {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-
-  .searchbar__input {
-    display: block;
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    border-radius: 2rem;
-    background-color: black;
-    animation: none;
-  }
-}
-
-/* === ANIMATIONS === */
-@keyframes fadeInSearch {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
+    max-width: 31.25rem; 
+    margin: 0 auto; 
   }
 }

@@ -34,7 +34,7 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: none; /* Supprime l'effet de transition */
+  transition: none; 
 }
 
 .featured-card__btn {
@@ -43,7 +43,7 @@
 
 .featured-card__image {
   width: 100%;
-  aspect-ratio: 16/9;
+  height: 20rem;
   object-fit: cover;
   display: block;
 }
@@ -92,7 +92,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: none; /* Supprime l'effet de transition */
+  transition: none; 
 }
 
 .carousel-button:hover {
@@ -128,7 +128,7 @@
 .featured-highlight {
   position: relative;
   width: 100%;
-  max-width: 100%; /* Prend toute la largeur */
+  max-width: 100%;
   margin: 0 auto;
   border-radius: 8px;
   overflow: hidden;
@@ -190,7 +190,7 @@
   .featured-highlight {
     max-width: 100%; 
     width: 100%;
-    margin-left: 3rem;
+
     border-radius: 0;
     box-shadow: none;
   }
@@ -226,7 +226,7 @@
 @media (min-width: 1440px) {
   .featured-highlight {
     max-width: 100%; 
-    margin-left: 3rem;
+
   }
 
   .featured-highlight__title {

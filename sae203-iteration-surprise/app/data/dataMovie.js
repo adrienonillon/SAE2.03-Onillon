@@ -1,4 +1,4 @@
-let HOST_URL = "https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203-iteration-surprise";
+let HOST_URL = "../..";
 
 let DataMovie = {};
 

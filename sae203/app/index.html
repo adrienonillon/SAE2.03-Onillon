@@ -84,7 +84,7 @@
         const profileImage = document.querySelector("#profile-image");
 
         if (!select.value) {
-          profileImage.src = `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203/server/images/default-avatar.png`;
+          profileImage.src = `../../server/images/default-avatar.png`;
           return;
         }
 
@@ -92,7 +92,7 @@
         C.profile = dataProfile[0];
 
         if (C.profile && C.profile.image) {
-          profileImage.src = `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203/server/images/${C.profile.image}`;
+          profileImage.src = `../../server/images/${C.profile.image}`;
         }
 
       
@@ -106,7 +106,7 @@
           return;
         }
         let response = await fetch(
-          `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203/server/script.php?todo=addFavoris&id_profil=${C.profile.id}&id_movie=${id_movie}`
+          `../../server/script.php?todo=addFavoris&id_profil=${C.profile.id}&id_movie=${id_movie}`
         );
         let result = await response.json();
 
@@ -131,7 +131,7 @@
           return;
         }
         let response = await fetch(
-          `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203/server/script.php?todo=removeFavoris&id_profil=${C.profile.id}&id_movie=${id_movie}`
+          `../../server/script.php?todo=removeFavoris&id_profil=${C.profile.id}&id_movie=${id_movie}`
         );
 
         let result = await response.json();
@@ -152,7 +152,7 @@
         }
         C.toggleFeatured(false);
         let response = await fetch(
-          `https://mmi.unilim.fr/~onillon4/SAE2.03-Onillon/sae203/server/script.php?todo=readFavoris&id_profil=${C.profile.id}`
+          `../../server/script.php?todo=readFavoris&id_profil=${C.profile.id}`
         );
         let favoris = await response.json();
 

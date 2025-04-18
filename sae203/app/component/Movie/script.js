@@ -8,7 +8,8 @@ Movie.format = function (movies, isFavorisPage = false) {
   }
 
   let html = "";
-  movies.forEach((movie) => {
+  for (let i = 0; i < movies.length; i++) {
+    let movie = movies[i];
     let movieHtml = template;
     movieHtml = movieHtml.replace("{{image}}", movie.image);
     movieHtml = movieHtml.replace("{{title}}", movie.name);
@@ -29,7 +30,7 @@ Movie.format = function (movies, isFavorisPage = false) {
     }
 
     html += movieHtml;
-  });
+  }
 
   return html;
 };
