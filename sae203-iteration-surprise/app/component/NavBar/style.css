@@ -1,19 +1,17 @@
+/* === BASE STYLES === */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1rem;
-  background-color: var(--color-bg);
+  background-color: var(--color-black);
   border-bottom: 1px solid var(--color-gray-dark);
   font-family: var(--ff);
   position: relative;
 }
 
-/* Logo centré par défaut (mobile) */
+/* Logo du site */
 .navbar__logo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -24,82 +22,100 @@
   cursor: pointer;
 }
 
-.navbar__icon {
-  width: 2rem; /* Taille du logo */
-  height: 2rem;
-  fill: var(--color-white); /* Couleur du logo */
-  transition: fill 0.3s ease;
-}
-
-/* Profil à gauche en mobile */
-.navbar__profil {
-  order: 0;
+/* Bouton des favoris */
+.navbar__favoris {
   display: flex;
   align-items: center;
-}
-
-/* Searchbar à droite en mobile */
-.navbar__search {
-  order: 2;
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-}
-
-/* Barre de navigation cachée en mobile */
-.navbar__list {
-  display: none;
-}
-
-/* Responsive Desktop */
-@media (min-width: 768px) {
-  .navbar {
-    justify-content: space-between;
-  }
-
-  .navbar__logo {
-    position: static;
-    transform: none;
-    font-size: 1.5rem;
-  }
-
-  .navbar__profil {
-    order: 2;
-    margin-left: auto;
-  }
-
-  .navbar__search {
-    order: 1;
-    margin: 0 auto;
-  }
-
-  .navbar__list {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-}
-
-/* Optional styling */
-.navbar__icon {
-  width: 2rem;
-  height: 2rem;
-  fill: var(--color-gray-light);
-  transition: fill 0.3s ease;
+  justify-content: center;
   cursor: pointer;
 }
 
-.navbar__icon:hover {
+.navbar__favoris svg {
+  width: 2rem;
+  height: 2rem;
   fill: var(--color-white);
+  transition: fill 0.3s ease;
 }
 
+.navbar__favoris:hover svg {
+  fill: var(--color-blue);
+}
+
+
+.navbar__list {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1; /* Permet de prendre l'espace disponible */
+  justify-content: center;
+}
+
+
+.navbar__search {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+/* Sélecteur de profil */
 #profile-select {
+  width: 6.5rem;
   background-color: var(--color-black);
   color: var(--color-white);
   border: 1px solid var(--color-gray-dark);
   border-radius: 0.25rem;
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
+}
+
+/* === MOBILE FIRST STYLES === */
+.navbar {
+  flex-wrap: nowrap;
+}
+
+.navbar__image {
+  display: none;
+}
+
+/* === MEDIA QUERIES === */
+
+/* Tablettes et écrans moyens (min-width: 768px) */
+@media (min-width: 768px) {
+  .navbar__logo {
+    font-size: 1.5rem;
+  }
+
+  .navbar__list {
+    margin: 0 auto; /* Centre la barre de navigation */
+  }
+
+  .navbar__search {
+    margin: 0 auto; /* Position équilibrée */
+  }
+}
+
+/* Écrans larges (min-width: 1024px) */
+@media (min-width: 1024px) {
+  .navbar {
+    padding: 1rem 2rem;
+  }
+
+  .navbar__logo {
+    font-size: 2rem;
+  }
+
+  .navbar__list {
+    gap: 2rem; /* Plus d'espacement pour les grands écrans */
+  }
+
+  .navbar__favoris svg {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  #profile-select {
+    font-size: 1rem;
+  }
 }

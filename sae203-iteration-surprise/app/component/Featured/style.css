@@ -1,23 +1,21 @@
 #featured-card {
-  display: flex; /* Aligne les cartes horizontalement */
-  gap: 20px; /* Espace entre les cartes */
-  overflow-x: auto; /* Permet le défilement horizontal */
-  scroll-behavior: smooth; /* Défilement fluide */
-  
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
   max-width: 100%;
-  position: relative; /* Assure que les cartes restent dans le conteneur */
+  position: relative;
 }
 
 #featured-card::-webkit-scrollbar {
-  display: none; /* Masque la barre de défilement */
+  display: none;
 }
-
 
 .featured-section {
   width: 100%;
-  
   background-color: var(--color-bg);
-  margin-bottom:  2rem;
+  margin-bottom: 2rem;
+
 }
 
 .featured-section__title {
@@ -25,11 +23,8 @@
   font-weight: bold;
   color: var(--color-txt-white, #fff);
   margin: 1rem 0 1rem 1rem;
-
   text-align: left;
 }
-
-
 
 .featured-card {
   width: 300px;
@@ -39,11 +34,7 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
-}
-
-.featured-card:hover {
-  transform: scale(1.05);
+  transition: none; /* Supprime l'effet de transition */
 }
 
 .featured-card__btn {
@@ -52,14 +43,9 @@
 
 .featured-card__image {
   width: 100%;
-
   aspect-ratio: 16/9;
   object-fit: cover;
   display: block;
-}
-
-.featured-card:hover .featured-card__image {
-  transform: scale(1.05);
 }
 
 .featured-card__overlay {
@@ -71,20 +57,15 @@
   font-size: 0.875rem;
   color: #aaa;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
 }
 
-
 .hidden {
   display: none !important;
-}
-
-.featured-card__btn {
-  cursor: pointer;
 }
 
 .carousel-controls {
@@ -99,34 +80,33 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
-  background-color: gray; /* Fond noir semi-transparent */
+  background-color: gray;
   border: none;
-  color: white; /* Couleur de la flèche */
-  font-size: 1.5rem; /* Taille de la flèche */
+  color: white;
+  font-size: 1.5rem;
   cursor: pointer;
   padding: 0.5rem;
-  border-radius: 50%; /* Bouton rond */
-  width: 2.5rem; /* Largeur fixe pour un cercle parfait */
-  height: 2.5rem; /* Hauteur fixe pour un cercle parfait */
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s, color 0.3s; /* Transition fluide pour le survol */
+  transition: none; /* Supprime l'effet de transition */
 }
 
 .carousel-button:hover {
-  background-color: white; /* Fond blanc au survol */
-  color: gray; /* Flèche grise au survol */
+  background-color: white;
+  color: gray;
 }
 
 .carousel-button--left {
-  left: 10px; /* Position à gauche */
+  left: 10px;
 }
 
 .carousel-button--right {
-  right: 10px; /* Position à droite */
+  right: 10px;
 }
-
 
 .carousel-container {
   position: relative;
@@ -147,23 +127,19 @@
 
 .featured-highlight {
   position: relative;
-  width: 100%; /* Prend toute la largeur disponible */
-  max-width: 600px; /* Limite la largeur maximale */
-  margin: 0 auto; /* Centre horizontalement */
-  border-radius: 8px; /* Coins arrondis */
-  overflow: hidden; /* Cache tout ce qui dépasse */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Ajoute une ombre */
+  width: 100%;
+  max-width: 100%; /* Prend toute la largeur */
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
 }
 
-.featured-highlight:hover {
-  transform: scale(1.05); /* Agrandit légèrement au survol */
-}
-
 .featured-highlight__image {
-  width: 100%; 
-  height: 17rem; 
-  object-fit: cover; 
+  width: 100%;
+  height: 17rem;
+  object-fit: cover;
   display: block;
 }
 
@@ -172,21 +148,100 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(2, 2, 2, 0.8),rgba(10, 10, 10, 2) , rgba(0, 0, 0, 0));; 
-  color: var(--color-txt-white); 
+  background: linear-gradient(to top, rgba(2, 2, 2, 0.8), rgba(10, 10, 10, 2), rgba(0, 0, 0, 0));
+  color: var(--color-txt-white);
   padding: 10px;
   text-align: left;
-  font-size: 0.8rem; 
+  font-size: 0.8rem;
 }
 
 .featured-highlight__title {
-  font-size: 1rem; /* Taille du titre légèrement plus grande */
+  font-size: 1rem;
   font-weight: bold;
-  margin: 0 0 5px 0; /* Ajoute un petit espace en bas */
+  margin: 0 0 5px 0;
 }
 
 .featured-highlight__description {
-  font-size: 0.75rem; /* Réduit la taille de la description */
-  margin: 0; /* Supprime les marges */
-  line-height: 1.2; /* Réduit l'espacement entre les lignes */
+  font-size: 0.75rem;
+  margin: 0;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+  .featured-highlight {
+    max-width: 80%;
+  }
+
+  .featured-highlight__title {
+    font-size: 1.5rem;
+  }
+
+  .featured-highlight__description {
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .featured-highlight {
+    max-width: 100%; 
+    width: 100%;
+    margin-left: 3rem;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .featured-highlight__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .featured-highlight__overlay {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .featured-highlight__title {
+    font-size: 2rem;
+  }
+
+  .featured-highlight__description {
+    font-size: 1rem;
+  }
+  
+  .carousel-track {
+    margin-left: 2rem;
+  }
+
+  .featured-section__title {
+    margin-left: 3rem;
+  }
+}
+  
+@media (min-width: 1440px) {
+  .featured-highlight {
+    max-width: 100%; 
+    margin-left: 3rem;
+  }
+
+  .featured-highlight__title {
+    font-size: 2.5rem;
+  }
+
+  .featured-highlight__description {
+    font-size: 1.125rem;
+  }
+
+  .carousel-track {
+    margin-left: 2rem;
+  }
+
+  .featured-section__title {
+    margin-left: 3rem;
+  }
 }

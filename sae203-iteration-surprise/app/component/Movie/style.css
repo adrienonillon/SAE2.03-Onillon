@@ -1,65 +1,50 @@
+/* === BASE STYLES === */
 .cards {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  gap: 2rem; /* Espacement entre les éléments */
-
-   /* Uniformisez le padding */
-  font-family: Arial, Helvetica, sans-serif;
-  width: 100%; /* Assurez-vous que la largeur occupe tout l'espace */
-  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .movie-card {
   position: relative;
-  width: 10rem;
-  height: 20rem; /* Ajuste automatiquement la hauteur */
+  width: 100%;
+  max-width: 100%;
+  height: auto;
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  flex: 0 0 250px;
-  min-width: 200px;
-  max-width: 150px;
-  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: #1a1a1a;
   display: flex;
-  flex-direction: column; /* Aligne les éléments verticalement */
-  align-items: center; /* Centre les éléments horizontalement */
-}
-
-.movie-card:hover {
-  transform: none; /* Supprime l'effet de zoom au survol */
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* Garde l'ombre par défaut */
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .movie-card_img {
   width: 100%;
-  height: 300px; /* Fixe une hauteur pour les images */
-  object-fit: cover; /* Garde les proportions de l'image */
+  height: 250px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   transition: filter 0.3s ease;
-   /* Coins arrondis uniquement en haut */
-}
-
-.movie-card:hover .movie-card_img {
-  filter: none; /* Supprime l'effet de luminosité au survol */
 }
 
 .movie-card_title {
-  position: static; /* Supprime la position absolue */
-  margin-top: 0.5rem; /* Ajoute un espace entre l'image et le titre */
-  color: var(--color-txt-white); /* Change la couleur du texte */
+  margin-top: 0.5rem;
+  color: var(--color-txt-white);
   font-size: 1rem;
   font-weight: bold;
-  text-align: center; /* Centre le texte */
-  opacity: 1; /* Toujours visible */
-  transform: none; /* Supprime les transformations */
-  transition: none; /* Supprime les transitions */
+  text-align: center;
 }
 
 .addFavoris_button {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
   background-color: #1a1a1a;
   color: white;
   border: none;
@@ -81,67 +66,72 @@
 }
 
 .addFavoris_button .icon-bookmark {
-  fill: none; 
+  fill: none;
   stroke: white;
   transition: fill 0.3s ease, stroke 0.3s ease;
 }
 
-.addFavoris_button.is-favoris .icon-bookmark {
-  fill: #007bff; 
-  stroke: #ffffff; 
-}
 
-.removeFavoris_button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: #007bff;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
+/* === MEDIA QUERIES === */
 
-.removeFavoris_button:hover {
-  background-color: #0056b3; 
-  transform: scale(1.1); 
-}
-
-@media (max-width: 1024px) {
+/* Tablettes et écrans moyens (min-width: 480px) */
+@media (min-width: 480px) {
   .movie-card {
-    flex: 1 1 calc(33.33% - 40px);
+    flex: 1 1 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
   }
 
-  .movie-card__title {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .movie-card {
-    flex: 1 1 calc(50% - 40px);
-    max-width: 45%;
+  .movie-card_img {
+    height: 250px;
   }
 
-  .movie-card__image {
-    max-height: 300px;
+  .movie-card_title {
+    font-size: 1.1rem;
   }
 }
 
-@media (max-width: 480px) {
+/* Tablettes larges (min-width: 768px) */
+@media (min-width: 768px) {
   .movie-card {
-    flex: 1 1 100%;
-    max-width: 100%;
-    margin: 10px 0;
+    flex: 1 1 calc(33.33% - 1rem);
+    max-width: calc(33.33% - 1rem);
   }
 
-  .movie-card__title {
-    font-size: 0.9rem;
-    padding: 4px;
+  .movie-card_img {
+    height: 300px;
+  }
+
+  .movie-card_title {
+    font-size: 1.2rem;
+  }
+
+  .addFavoris_button {
+    top: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Écrans larges (min-width: 1024px) */
+@media (min-width: 1024px) {
+  .movie-card {
+    flex: 1 1 calc(25% - 1rem);
+    max-width: calc(25% - 1rem);
+  }
+
+  .movie-card_img {
+    height: 350px;
+  }
+
+  .movie-card_title {
+    font-size: 1.3rem;
+  }
+
+  .addFavoris_button {
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
   }
 }

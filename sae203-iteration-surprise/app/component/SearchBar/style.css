@@ -1,23 +1,23 @@
-/* Barre de recherche (mobile-first) */
+/* === BASE STYLES === */
 .searchbar {
-  position: relative; /* Relative pour s'intégrer dans la barre de navigation */
+  position: relative;
   display: flex;
-  flex-direction: row; /* Les éléments restent alignés horizontalement */
-  align-items: center; /* Centre verticalement les éléments */
-  justify-content: flex-end; /* Aligne les éléments à droite */
-  max-width: 100%; /* La barre de recherche occupe toute la largeur si nécessaire */
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  max-width: 100%;
   transition: all 0.3s ease;
-  margin-left: auto; /* Pousse la barre de recherche à droite */
+  margin-left: auto;
 }
 
 .searchbar.active {
-  display: flex; /* Affichée lorsqu'elle est active */
+  display: flex;
 }
 
 .searchbar__input {
   display: block;
   width: 100%;
-  max-width: 15rem; /* Limite la largeur de l'input */
+  max-width: 5rem;
   padding: 0.75rem 1rem;
   font-size: 1rem;
   font-family: var(--ff-sans);
@@ -64,51 +64,55 @@
   fill: var(--color-white);
 }
 
-/* Desktop (768px et plus) */
+.hidden {
+  display: none !important;
+}
+
+/* === MEDIA QUERIES === */
+
+/* Tablettes et écrans moyens (min-width: 768px) */
 @media (min-width: 768px) {
   .searchbar {
-    position: relative; /* Position relative pour recentrer */
+    position: relative;
     top: 0;
     right: 0;
-    left: 50%; /* Centre horizontalement */
-    transform: translateX(-50%); /* Ajuste pour un centrage parfait */
-    justify-content: center; /* Centre horizontalement les éléments */
-    max-width: 31.25rem; /* Largeur maximale sur desktop */
-    margin: 0 auto; /* Centre la barre de recherche */
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+    max-width: 31.25rem;
+    margin: 0 auto;
   }
 
   .searchbar__input {
-    max-width: 100%; /* La largeur s'adapte au conteneur */
+    max-width: 100%;
   }
 }
 
+/* Petits écrans larges (max-width: 48rem) */
 @media (max-width: 48rem) {
   .searchbar {
-    flex-direction: row; /* Les éléments restent alignés horizontalement */
-    align-items: center; /* Centre verticalement les éléments */
-    justify-content: center; /* Centre horizontalement la barre de recherche */
-    max-width: 100%; /* La barre de recherche occupe toute la largeur */
-    margin-left: 1rem; /* Ajoute un espacement à gauche */
-    margin-right: 1rem; /* Ajoute un espacement à droite */
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 
   .searchbar__input {
-    display: block; /* Toujours visible même en format téléphone */
+    display: block;
     position: relative;
     top: 0;
     left: 0;
     right: 0;
     z-index: 10;
     border-radius: 2rem;
-    background-color: black; /* Conserve le fond noir */
-    animation: none; /* Supprime l'animation pour un affichage direct */
+    background-color: black;
+    animation: none;
   }
 }
 
-.hidden {
-  display: none !important;
-}
-
+/* === ANIMATIONS === */
 @keyframes fadeInSearch {
   from {
     opacity: 0;

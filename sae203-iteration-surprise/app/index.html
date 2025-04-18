@@ -23,6 +23,7 @@
       import { Favoris } from "./component/Favoris/script.js";
       import { Featured } from "./component/Featured/script.js";
       import { SearchBar } from "./component/SearchBar/script.js";
+      import { Footer } from "./component/Footer/script.js";
 
       window.C = {};
 
@@ -45,6 +46,7 @@
         C.getMovie();
         C.getCategories();
         C.getFeaturedMovies();
+        V.renderFooter();
       };
 
       C.handlerDetail = async function (id) {
@@ -257,7 +259,12 @@
         let featuredSection = document.querySelector("#featured-card");
         featuredSection.innerHTML = Featured.format(movies);
       };
-
+      
+      V.renderFooter = function () {
+      let footer = document.createElement("footer");
+      footer.innerHTML = Footer.render();
+      document.body.appendChild(footer);
+    };
       C.start();
     </script>
   </body>

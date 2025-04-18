@@ -1,99 +1,90 @@
-/* === CATEGORY CONTAINER === */
+
 .movie-category {
   width: 100%;
   border-radius: 16px;
   box-sizing: border-box;
   padding: 0 20px 0 20px;
-  
 }
 
-/* === CATEGORY TITLE === */
+
 .movie-category__title {
   padding-bottom: 10px;
   text-align: left;
-  font-size: 1.7rem; 
+  font-size: 1.7rem;
   font-weight: bold;
   color: var(--color-txt-white);
-  
 }
 
 .movie-category__item {
   display: flex;
-  flex-direction: column; /* Aligne les éléments verticalement */
-  align-items: center; /* Centre les éléments horizontalement */
+  flex-direction: column;
+  align-items: center;
   justify-content: flex-start;
-  width: 150px; /* Largeur par défaut pour les petits écrans */
+  width: 150px;
   max-width: 150px;
   height: auto;
   box-sizing: border-box;
-  font-size: 0.9rem; /* Taille de texte par défaut */
+  font-size: 0.9rem;
 }
+
+
 
 .carousel {
   position: relative;
   overflow: hidden;
-  
   width: 100%;
 }
 
 .carousel__track {
   display: flex;
   gap: 1rem;
-
   overflow-x: auto;
   scroll-behavior: smooth;
-  
   scrollbar-width: none;
   transition: transform 0.5s ease-in-out;
 }
 
 .carousel__track > * {
-  flex: 0 0 200px; /* Largeur fixe pour chaque élément du carrousel */
-  max-width: 200px; /* Empêche les éléments de dépasser cette largeur */
-  box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur totale */
+  flex: 0 0 200px;
+  max-width: 200px;
+  box-sizing: border-box;
 }
 
 .carousel__track::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
-
 
 .carousel__button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
-  background-color: gray; /* Fond noir semi-transparent */
+  background-color: gray;
   border: none;
-  color: white; /* Couleur de la flèche */
-  font-size: 1.5rem; /* Taille de la flèche adaptée aux petits écrans */
+  color: white;
+  font-size: 1.5rem;
   cursor: pointer;
   padding: 0.5rem;
-  border-radius: 50%; /* Rend le fond parfaitement rond */
-  width: 2.5rem; /* Largeur fixe pour un cercle parfait */
-  height: 2.5rem; /* Hauteur fixe pour un cercle parfait */
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s, color 0.3s; /* Transition fluide pour le survol */
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.carousel__button:hover {
-  background-color: white; /* Fond blanc au survol */
-  color: gray; /* Flèche grise au survol */
+.carousel:hover .carousel__button {
+  opacity: 1;
 }
 
 .carousel__button--left {
-  left: 0.5rem; /* Position à gauche */
+  left: 0.5rem;
 }
 
 .carousel__button--right {
-  right: 0.5rem; /* Position à droite */
-}
-
-
-.movie-category__item {
-  font-size: 1rem; /* Taille de texte par défaut */
+  right: 0.5rem;
 }
 
 /* === MEDIA QUERIES === */
@@ -101,34 +92,34 @@
 /* Tablettes et écrans moyens (min-width: 480px) === */
 @media (min-width: 480px) {
   .movie-category__title {
-    font-size: 1.2rem; /* Augmente la taille du titre */
+    font-size: 1.2rem;
   }
 
   .movie-category__item {
-    font-size: 1.2rem; /* Taille de texte adaptée */
+    font-size: 1.2rem;
   }
 }
 
 /* Tablettes et écrans moyens */
 @media (min-width: 768px) {
   .movie-category__title {
-    font-size: 1.5rem; /* Augmente la taille du titre */
+    font-size: 1.5rem;
   }
 
   .movie-category__item {
-    width: 200px; /* Largeur plus grande pour les écrans moyens */
+    width: 200px;
     max-width: 200px;
-    font-size: 3rem; /* Taille de texte adaptée */
+    font-size: 3rem;
   }
 
   .carousel__button {
-    font-size: 2rem; /* Augmente la taille de la flèche */
-    width: 3rem; /* Taille plus grande pour les écrans moyens */
+    font-size: 2rem;
+    width: 3rem;
     height: 3rem;
   }
 
   .carousel__button--left {
-    left: 1rem; /* Ajuste la position */
+    left: 1rem;
   }
 
   .carousel__button--right {
@@ -138,24 +129,30 @@
 
 /* Écrans larges */
 @media (min-width: 1024px) {
+  .movie-category {
+    padding-left: 3rem; 
+  }
+
+
+
   .movie-category__title {
-    font-size: 2rem; /* Taille encore plus grande pour les grands écrans */
+    font-size: 2rem;
   }
 
   .movie-category__item {
-    width: 250px; /* Largeur encore plus grande pour les grands écrans */
+    width: 250px;
     max-width: 250px;
-    font-size: 1.2rem; /* Taille de texte adaptée */
+    font-size: 1.2rem;
   }
 
   .carousel__button {
-    font-size: 2.5rem; /* Taille encore plus grande pour les grands écrans */
+    font-size: 2.5rem;
     width: 3.5rem;
     height: 3.5rem;
   }
 
   .carousel__button--left {
-    left: 1.5rem; /* Position plus éloignée */
+    left: 1.5rem;
   }
 
   .carousel__button--right {

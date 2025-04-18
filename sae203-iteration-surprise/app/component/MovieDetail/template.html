@@ -7,10 +7,9 @@
       <div class="movie__info">
         <div class="movie__header">
           <h2 class="movie__title">{{titre}}</h2>
-          <button class="favoris-btn" onclick="C.addFavoris('{{id}}')">
-
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
-              <path d="M6 2C5.44772 2 5 2.44772 5 3V21.382C5 21.8471 5.53857 22.0806 5.89443 21.7764L12 16.382L18.1056 21.7764C18.4614 22.0806 19 21.8471 19 21.382V3C19 2.44772 18.5523 2 18 2H6Z" />
+          <button class="movie__favoris-btn" onclick="C.addFavoris('{{id}}')" aria-label="Ajouter aux favoris">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-bookmark">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
             </svg>
           </button>
         </div>

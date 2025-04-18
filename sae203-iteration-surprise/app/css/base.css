@@ -11,3 +11,4 @@
 @import "../component/Favoris/style.css" layer(components);
 @import "../component/Featured/style.css" layer(components);
 @import "../component/SearchBar/style.css" layer(components);
+@import "../component/Footer/style.css" layer(components);
