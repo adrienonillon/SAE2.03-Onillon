@@ -110,3 +110,4 @@ Cette association respecte les règles suivantes :
 Un film peut être mis en favoris par aucun ou plusieurs profils utilisateurs, d’où une cardinalité de (0,n) du côté de Profil.
 
 Un profil utilisateur peut également avoir 0 à plusieurs films en favoris, ce qui donne une cardinalité de (0,n) du côté de Movie.
+

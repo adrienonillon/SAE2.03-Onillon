@@ -1,9 +1,9 @@
 <?php
 
 define("HOST", "localhost");
-define("DBNAME", "SAE203");
-define("DBLOGIN", "usersae203");
-define("DBPWD", "Ver12Do0267@");
+define("DBNAME", "onillon4");
+define("DBLOGIN", "onillon4");
+define("DBPWD", "onillon4");
 
 
 function getAllMovies(){
